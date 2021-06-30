@@ -1,0 +1,49 @@
+{% extends 'mydiary/base.html' %} {% block content %} {% load static %}
+<div class="contentlist">
+  <div class="content">
+<h1 id="inpuut" >입력</h1>
+<form method="POST" class="post-form" enctype="multipart/form-data" style="
+  ">
+  {% csrf_token %} 
+    <label class="mt-3" for="title">제목</label>
+    <input type="text" class="form-control" name="title" maxlength="200" required="" id="id_title">
+
+    
+    <label class="mt-3" for="date">작성자</label>
+    <input type="text" class="form-control" name="user" maxlength="200" required="" id="id_user">
+    <label class="mt-3" for="star">별점</label>
+    <fieldset class="rating"id="id_star">
+    <input id="id_star" type="radio" name="star" value="1"> 
+        <label for="id_star">1 star</label>
+        <input id="demo-2" type="radio" name="star" value="2">
+        <label for="demo-2">2 stars</label>
+        <input id="demo-3" type="radio" name="star" value="3">
+        <label for="demo-3">3 stars</label>
+        <input id="demo-4" type="radio" name="star" value="4">
+        <label for="demo-4">4 stars</label>
+        <input id="demo-5" type="radio" name="star" value="5">
+        <label for="demo-5">5 stars</label>
+</ul>
+        <div class="stars">
+            <label for="id_star" aria-label="1 star" title="1 star"></label>
+            <label for="demo-2" aria-label="2 stars" title="2 stars"></label>
+            <label for="demo-3" aria-label="3 stars" title="3 stars"></label>
+            <label for="demo-4" aria-label="4 stars" title="4 stars"></label>
+            <label for="demo-5" aria-label="5 stars" title="5 stars"></label>   
+        </div>
+        
+    </fieldset>
+    
+    <label class="mt-3" for="highlight">명대사</label>
+    <input type="text" name="highlight" class="form-control"  maxlength="200" required="" id="id_highlight">
+    <label class="mt-3" for="review">리뷰</label>
+    <textarea name="review" cols="40" rows="10" class="form-control"  required="" id="id_review"></textarea>
+    <label class="mt-3" for="review">영화사진</label>
+    <input type="file" name="image" accept="image/*" required="" id="id_image">
+  <button class="btn btn-primary mt-3" type="submit">저장하기</button>
+  
+</form>
+
+</div>
+</div>
+{%endblock %}
