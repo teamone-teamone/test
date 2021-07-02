@@ -1,25 +1,37 @@
 from django import forms
-from .models import Content
+from . import models as test_models
 
 
-class ContentForm(forms.ModelForm):
+class NewUrlForm(forms.ModelForm):
     class Meta:
-        model = Content
+        model = test_models.Url
+        fields = [
+            "urladdress",
+        ]
+
+
+class ChangeWebmarkTitleForm(forms.ModelForm):
+    class Meta:
+        model = test_models.WebMark
         fields = [
             "title",
-            "user",
-            "image",
-            "star",
-            "highlight",
-            "review",
         ]
 
-class ContentEditForm(forms.ModelForm):
+
+class ChangeRepositoryTitleForm(forms.ModelForm):
     class Meta:
-        model = Content
+        model = test_models.Repository
         fields = [
-            "star",
-            "highlight",
-            "review",
+            "title",
         ]
+
+
+# class ContentEditForm(forms.ModelForm):
+#     class Meta:
+#         model = Content
+#         fields = [
+#             "star",
+#             "highlight",
+#             "review",
+#         ]
 

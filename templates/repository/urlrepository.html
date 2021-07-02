@@ -1,0 +1,27 @@
+<H3><form method="POST" action="{% url 'test:changeRepositoryTitle' repository.pk %}" enctype="multipart/form-data">
+  {% csrf_token %} 
+  <input type="text" name="title" maxlength="50" required="" value="{{repository.title}}" id="id_title">
+  </form>
+  </H3>
+<br>
+<form method="POST" action="{% url 'test:newUrl' repository.pk%}" enctype="multipart/form-data">
+  {% csrf_token %} 
+  <input type="text" name="urladdress" maxlength="300" required="" id="id_urladdress" placeholder="New url">
+  </form>
+<br>
+{% for webmark in repository.webmark.all %}
+    <form method="POST" action="{% url 'test:changeWebmarkTitle' repository.pk webmark.pk%}" enctype="multipart/form-data">
+  {% csrf_token %} 
+  <input type="text" name="title" maxlength="50" required="" value="{{webmark.title}}" id="id_title">
+  </form>
+    {% for url in webmark.url.all %}
+        URL : <a href="{{url.urladdress}}" target='_blank'>{{url.urladdress}}</a>
+        #  {{url.description1}}<br>
+    {% endfor %}
+
+    <form method="POST" action="{% url 'test:addUrl' repository.pk webmark.pk%}" enctype="multipart/form-data">
+  {% csrf_token %} 
+  <input type="text" name="urladdress" maxlength="300" required="" id="id_urladdress" placeholder="Add url">
+  </form>
+    <br>
+{% endfor %}
