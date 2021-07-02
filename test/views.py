@@ -120,7 +120,7 @@ def changedescription2(request, pk_repo, pk_url):
     if request.method == "POST":
         form = test_forms.ChangeDescription(request.POST)
         if form.is_valid():
-            description2 = form.cleaned_data.get("description2")
+            description2 = form.cleaned_data.get("description1")
             description2 = description2.replace("#", "")
             url.description2 = description2
             url.save()
@@ -135,7 +135,7 @@ def changedescription3(request, pk_repo, pk_url):
     if request.method == "POST":
         form = test_forms.ChangeDescription(request.POST)
         if form.is_valid():
-            description3 = form.cleaned_data.get("description3")
+            description3 = form.cleaned_data.get("description1")
             description3 = description3.replace("#", "")
             url.description3 = description3
             url.save()

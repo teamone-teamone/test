@@ -41,12 +41,12 @@
         {%if url.description1%}
         <form method="POST" action="{% url 'test:changedescription2' repository.pk url.pk%}" enctype="multipart/form-data">
         {% csrf_token %} 
-          <input type="text" name="description2" maxlength="10" required="" value="#{{url.description2}}" id="id_description2">
+          <input type="text" name="description1" maxlength="10" required="" value="#{{url.description2}}" id="id_description1">
           </form>
           {%if url.description2%}
           <form method="POST" action="{% url 'test:changedescription3' repository.pk url.pk%}" enctype="multipart/form-data">
         {% csrf_token %} 
-          <input type="text" name="description3" maxlength="10" required="" value="#{{url.description3}}" id="id_description3">
+          <input type="text" name="description1" maxlength="10" required="" value="#{{url.description3}}" id="id_description1">
           </form>
           {% endif %}
         {% endif %}
