@@ -26,8 +26,13 @@
   {% csrf_token %} 
   <input type="text" name="title" maxlength="50" required="" value="{{webmark.title}}" id="id_title">
   </form>
+  <a href="{% url 'test:deleteWebmark' repository.pk webmark.pk %}">
+  delete webmark</a>
+  <br>
     {% for url in webmark.url.all %}
-        URL : <a href="{{url.urladdress}}" target='_blank'>{{url.urladdress}}</a>
+        URL : <a href="{{url.urladdress}}" target='_blank'>{{url.urltitle}}</a>
+        <a href="{% url 'test:deleteUrl' repository.pk url.pk %}">
+  delete url</a>
         <form method="POST" action="{% url 'test:changedescription1' repository.pk url.pk%}" enctype="multipart/form-data">
         {% csrf_token %} 
           <input type="text" name="description1" maxlength="10" required="" value="#{{url.description1}}" id="id_description1">

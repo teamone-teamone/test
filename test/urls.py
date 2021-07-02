@@ -15,6 +15,16 @@ urlpatterns = [
         name="changeWebmarkTitle",
     ),
     path(
+        "deleteWebmark/<int:pk_repo>/<int:pk_web>/",
+        views.deleteWebmark,
+        name="deleteWebmark",
+    ),
+    path(
+        "deleteUrl/<int:pk_repo>/<int:pk_url>/",
+        views.deleteUrl,
+        name="deleteUrl",
+    ),
+    path(
         "changeRepositoryTitle/<int:pk>/",
         views.changeRepositoryTitle,
         name="changeRepositoryTitle",

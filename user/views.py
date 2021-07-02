@@ -24,7 +24,7 @@ class LoginView(FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse("test:home")
+        return reverse("user:myrepo")
 
     def get(self, request, *args, **kwargs):
         """Handle GET requests: instantiate a blank version of the form."""
@@ -37,7 +37,7 @@ class LoginView(FormView):
 def signup(request):
 
     if request.user.is_authenticated:
-        return redirect(reverse("test:home"))
+        return redirect(reverse("user:myrepo"))
 
     form = forms.SignUpForm(request.POST or None)
 
@@ -48,7 +48,7 @@ def signup(request):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-        return redirect(reverse("test:home"))
+        return redirect(reverse("user:myrepo"))
 
     return render(request, "user/signup.html", {"form": form,},)
 

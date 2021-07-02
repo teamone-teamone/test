@@ -41,6 +41,7 @@ def newUrl(request, pk):
             url = form.save(commit=False)
             newWebmark = test_models.WebMark.objects.create(for_repository=repo)
             url.for_webmark = newWebmark
+            url.urltitle = url.geturltitle()
             url.save()
             return redirect(reverse("test:urlrepository", kwargs={"pk": pk}))
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk}))
@@ -53,21 +54,7 @@ def addUrl(request, pk_repo, pk_web):
         if form.is_valid():
             url = form.save(commit=False)
             url.for_webmark = web
-            url.save()
-            return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo})
-            )
-    return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
-
-
-def addUrl(request, pk_repo, pk_web):
-    repo = get_object_or_404(test_models.Repository, pk=pk_repo)
-    web = get_object_or_404(test_models.WebMark, pk=pk_web)
-    if request.method == "POST":
-        form = test_forms.NewUrlForm(request.POST)
-        if form.is_valid():
-            url = form.save(commit=False)
-            url.for_webmark = web
+            url.urltitle = url.geturltitle()
             url.save()
             return redirect(
                 reverse("test:urlrepository", kwargs={"pk": pk_repo})
@@ -86,6 +73,18 @@ def changeWebmarkTitle(request, pk_repo, pk_web):
             return redirect(
                 reverse("test:urlrepository", kwargs={"pk": pk_repo})
             )
+    return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
+
+
+def deleteWebmark(request, pk_repo, pk_web):
+    web = get_object_or_404(test_models.WebMark, pk=pk_web)
+    web.delete()
+    return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
+
+
+def deleteUrl(request, pk_repo, pk_url):
+    url = get_object_or_404(test_models.Url, pk=pk_url)
+    url.delete()
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
 
 
