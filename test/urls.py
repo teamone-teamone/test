@@ -1,4 +1,3 @@
-"""mydiary urls linked myproject urls.py"""
 from django.urls import path
 from . import views
 
@@ -16,11 +15,28 @@ urlpatterns = [
         name="changeWebmarkTitle",
     ),
     path(
-        "changeRepositoryTitle/<int:pk_repo>/",
+        "changeRepositoryTitle/<int:pk>/",
         views.changeRepositoryTitle,
         name="changeRepositoryTitle",
     ),
-    # path("edit/<int:pk>", views.edit, name="edit"),
-    # path("delete/<int:pk>", views.delete, name="delete"),
-    # path("deleteensure/<int:pk>", views.deleteensure, name="deleteensure"),
+    path(
+        "deleterepository/<int:pk>/",
+        views.deleterepository,
+        name="deleterepository",
+    ),
+    path(
+        "changedescription1/<int:pk_repo>/<int:pk_url>/",
+        views.changedescription1,
+        name="changedescription1",
+    ),
+    path(
+        "changedescription2/<int:pk_repo>/<int:pk_url>/",
+        views.changedescription2,
+        name="changedescription2",
+    ),
+    path(
+        "changedescription3/<int:pk_repo>/<int:pk_url>/",
+        views.changedescription3,
+        name="changedescription3",
+    ),
 ]

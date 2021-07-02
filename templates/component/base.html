@@ -1,0 +1,25 @@
+{% load i18n %}
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}"> 
+    <title>{%block page_title%}기본 {%endblock page_title %} | URL repo
+    </title>
+</head>
+<body>
+   <header>
+   {%block home_logo%}<a href = "{% url 'test:home' %}">URL repo</a> {%endblock home_logo %}
+    {% if user.is_authenticated %}
+    {%block userbutton%}<a href = "{% url 'user:myrepo' %}">My page</a>  {%endblock userbutton %}
+       
+    {% else %}
+       <a href = "{% url 'user:login' %}">login</a> 
+    {% endif %}
+   </header> 
+   {%block main%}{%endblock main %}
+</body>

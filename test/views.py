@@ -3,13 +3,17 @@ from django.utils import timezone
 from . import models as test_models
 from . import forms as test_forms
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import authenticate
 
 # Create your views here.
 
 
 def home(request):
-    newRepository = test_models.Repository.objects.create()
 
+    newRepository = test_models.Repository.objects.create()
+    if request.user.is_authenticated:
+        newRepository.for_user = request.user
+        newRepository.save()
     return redirect(
         reverse("test:urlrepository", kwargs={"pk": newRepository.pk})
     )
@@ -21,6 +25,12 @@ def urlrepository(request, pk):
     return render(
         request, "repository/urlrepository.html", {"repository": repository},
     )
+
+
+def deleterepository(request, pk):
+    repository = get_object_or_404(test_models.Repository, pk=pk)
+    repository.delete()
+    return redirect(reverse("user:myrepo"))
 
 
 def newUrl(request, pk):
@@ -79,59 +89,58 @@ def changeWebmarkTitle(request, pk_repo, pk_web):
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
 
 
-def changeRepositoryTitle(request, pk_repo):
-    repo = get_object_or_404(test_models.Repository, pk=pk_repo)
+def changeRepositoryTitle(request, pk):
+    repo = get_object_or_404(test_models.Repository, pk=pk)
     if request.method == "POST":
         form = test_forms.ChangeRepositoryTitleForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data.get("title")
             repo.title = title
             repo.save()
+            return redirect(reverse("test:urlrepository", kwargs={"pk": pk}))
+    return redirect(reverse("test:urlrepository", kwargs={"pk": pk}))
+
+
+def changedescription1(request, pk_repo, pk_url):
+    url = get_object_or_404(test_models.Url, pk=pk_url)
+    if request.method == "POST":
+        form = test_forms.ChangeDescription(request.POST)
+        if form.is_valid():
+            description1 = form.cleaned_data.get("description1")
+            description1 = description1.replace("#", "")
+            url.description1 = description1
+            url.save()
             return redirect(
                 reverse("test:urlrepository", kwargs={"pk": pk_repo})
             )
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
 
 
-# def new(request):
-#     if request.method == "POST":
-#         form = ContentForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.author = request.user
-#             post.published_date = timezone.now()
-#             post.save()
-#             return redirect("home")
-#     else:
-#         form = ContentForm()
-#     return render(request, "mydiary/new.html", {"form": form})
+def changedescription2(request, pk_repo, pk_url):
+    url = get_object_or_404(test_models.Url, pk=pk_url)
+    if request.method == "POST":
+        form = test_forms.ChangeDescription(request.POST)
+        if form.is_valid():
+            description2 = form.cleaned_data.get("description2")
+            description2 = description2.replace("#", "")
+            url.description2 = description2
+            url.save()
+            return redirect(
+                reverse("test:urlrepository", kwargs={"pk": pk_repo})
+            )
+    return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
 
 
-# def detail(request, pk):
-#     post = get_object_or_404(Content, pk=pk)
-#     return render(request, "mydiary/detail.html", {"post": post})
-
-
-# def edit(request, pk):
-#     post = get_object_or_404(Content, pk=pk)
-#     if request.method == "POST":
-#         form = ContentEditForm(request.POST, request.FILES, instance=post)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.author = request.user
-#             post.published_date = timezone.now()
-#             post.save()
-#             return redirect("detail", pk=post.pk)
-#     else:
-#         form = ContentEditForm(instance=post)
-#         return render(request, "mydiary/edit.html", {"post":post, "form": form})
-
-
-# def delete(request, pk):
-#     post = get_object_or_404(Content, pk=pk)
-#     post.delete()
-#     return redirect("home")
-
-# def deleteensure(request, pk):
-#     post = get_object_or_404(Content, pk=pk)
-#     return render(request, "mydiary/deleteensure.html", {"post": post})
+def changedescription3(request, pk_repo, pk_url):
+    url = get_object_or_404(test_models.Url, pk=pk_url)
+    if request.method == "POST":
+        form = test_forms.ChangeDescription(request.POST)
+        if form.is_valid():
+            description3 = form.cleaned_data.get("description3")
+            description3 = description3.replace("#", "")
+            url.description3 = description3
+            url.save()
+            return redirect(
+                reverse("test:urlrepository", kwargs={"pk": pk_repo})
+            )
+    return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))

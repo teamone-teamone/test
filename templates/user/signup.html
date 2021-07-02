@@ -1,0 +1,38 @@
+{%extends "component/base.html"%}
+
+{% block page_title%}
+signup
+{%endblock%}
+
+{%block home_logo%}
+<a href = "{% url 'test:home'%}">URL repo</a> 
+{%endblock home_logo %}
+
+{% block main%}
+<form method="POST" class="w-full" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    <span >{{error}}</span>
+    {% endfor %}
+    {% endif %}
+
+    {% for field in form %}
+    <div>
+    {{field}}</div>
+    {% if field.errors %}
+    {% for error in field.errors %}
+    <span>{{error}}</span>
+    {% endfor %}
+    {% endif %}
+    {%endfor%}
+
+
+
+    <button >Sign Up</button>
+
+</form>
+
+{%endblock%}
+
+

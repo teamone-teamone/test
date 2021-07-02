@@ -1,0 +1,28 @@
+{%extends "component/base.html"%}
+
+{% block page_title%}
+{{user.nickname}}
+{%endblock%}
+
+{%block userbutton%}
+<a href = "{% url 'user:logout' %}">logout</a>
+{%endblock userbutton %}
+       
+
+{%block home_logo%}
+<a href = "{% url 'test:home'%}">URL repo</a> 
+{%endblock home_logo %}
+
+{% block main%}
+{% for repo in repolist %}
+<a href = "{% url 'test:urlrepository' repo.pk%}">
+{{repo.title}}
+</a>
+<a href = "{% url 'test:deleterepository' repo.pk%}">
+삭제
+</a>
+<br>
+{% endfor %}
+<a href = "{% url 'test:home'%}">+new repository</a> 
+
+{%endblock%}

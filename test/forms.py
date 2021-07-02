@@ -10,6 +10,14 @@ class NewUrlForm(forms.ModelForm):
         ]
 
 
+class ChangeDescription(forms.ModelForm):
+    class Meta:
+        model = test_models.Url
+        fields = [
+            "description1",
+        ]
+
+
 class ChangeWebmarkTitleForm(forms.ModelForm):
     class Meta:
         model = test_models.WebMark
