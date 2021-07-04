@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 class Repository(core_models.TimeStampedModel):
     isopen_CHOICES = (("yes", "yes"), ("no", "no"))
     # objects = models.Manager()
-    title = models.CharField(max_length=50, default="Repository title")
+    title = models.CharField(max_length=50, default="New Repo title")
     isopen = models.CharField(
         max_length=10, choices=isopen_CHOICES, default="yes"
     )
@@ -34,7 +34,7 @@ class WebMark(core_models.TimeStampedModel):
         on_delete=models.CASCADE,
         null=False,
     )
-    title = models.CharField(max_length=50, default="WebMark name")
+    title = models.CharField(max_length=50, default="New WebMark Title")
 
 
 class Url(core_models.TimeStampedModel):
@@ -48,7 +48,11 @@ class Url(core_models.TimeStampedModel):
     description3 = models.CharField(max_length=10, default="")
 
     def geturltitle(self):
-        html = urlopen(self.urladdress)
-        bsObject = BeautifulSoup(html, "html.parser")
-        title = bsObject.find("title").text
+        try:
+
+            html = urlopen(self.urladdress)
+            bsObject = BeautifulSoup(html, "html.parser")
+            title = bsObject.find("title").text
+        except:
+            title = self.urladdress
         return title
