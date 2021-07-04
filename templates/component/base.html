@@ -14,13 +14,25 @@
 
 <body >
    <header>
-      {%block home_logo%}<a href="{% url 'test:home' %}">URL repo</a> {%endblock home_logo %}
-      {% if user.is_authenticated %}
-      {%block userbutton%}<a href="{% url 'user:myrepo' %}">My page</a> {%endblock userbutton %}
+   {%block home_logo%}<a href = "{% url 'test:home' %}">URL repo</a> {%endblock home_logo %}
 
-      {% else %}
-      <a href="{% url 'user:login' %}"><img src="{% static 'Picture1.png'%}"></a>
-      {% endif %}
-   </header>
+   <form class="search">
+      <input class="keyword" type="text" name="search" maxlength= 500 value="" autocomplete="off">
+      <button class="img-button" type="submit" name="click" value="">
+         <i class="fas fa-search"></i>
+      </button>
+      
+   </form>
+
+   {% if user.is_authenticated %}
+    {%block userbutton%}<a href = "{% url 'user:myrepo' %}">My page</a>  {%endblock userbutton %}
+       
+    {% else %}
+       <a class="login" href = "{% url 'user:login' %}"><img src="{% static 'image/person.jpg'%}" ></a> 
+    {% endif %}
+
+
+
+   </header> 
    {%block main%}{%endblock main %}
 </body>

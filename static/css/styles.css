@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "InfinitySans-BoldA1";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-BoldA1.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   background-color: white;
   margin: 0 auto;
@@ -212,4 +220,89 @@ blockquote input {
 }
 .my-repo-backgraound {
   background-color: #2e3e99;
+  background-color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.homelogo {
+  color: #78bfe7;
+  text-decoration: none;
+  font-size: 50px;
+  font-family: "InfinitySans-BoldA1";
+  display: flex;
+}
+
+.create_account,
+.login_button,
+.signup_button {
+  background-color: white;
+  border: none;
+  color: #2e3e99;
+  padding: 10px 70px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 5px 5px;
+  cursor: pointer;
+  border-radius: 60px;
+}
+
+button.img-button {
+  border: none;
+  background: transparent;
+  width: 100px;
+  font-size: 30px;
+  margin: 15px;
+  padding: 10px;
+}
+
+.fas {
+  color: #2e3e99;
+}
+
+.keyword {
+  border: none;
+  border-bottom: 2px solid #2e3e99;
+  outline: none;
+  background: transparent;
+  width: 800px;
+  color: black;
+  font-size: 1.063rem;
+  padding: 10px;
+  margin: 10px;
+}
+
+img {
+  width: 50px;
+  display: block;
+  padding: 15px;
+  margin: 0px;
+}
+
+.w-full {
+  display: block;
+  width: 200px;
+  margin: 100px auto;
+  border: none;
+  padding: 15px;
+}
+
+div.left {
+  width: 50%;
+  float: left;
+  box-sizing: border-box;
+
+  background: white;
+}
+div.right {
+  width: 50%;
+  float: right;
+  box-sizing: border-box;
+
+  background: #2e3e99;
 }
