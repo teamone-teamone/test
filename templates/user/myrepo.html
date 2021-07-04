@@ -4,15 +4,15 @@
 {{user.nickname}}
 {%endblock%}
     {%block userbutton%}
-    <a href="{% url 'user:logout' %}">logout</a>
+    <a class="logout" href="{% url 'user:logout' %}"><i class="profile-logo fas fa-user-circle"></i>logout</a>
     {%endblock userbutton %}
 
 
     {%block home_logo%}
-    <a href="{% url 'test:home'%}">URL repo</a>
+    <a class="homelogo" href="{% url 'test:home'%}">URL repo</a>
     {%endblock home_logo %}
-{%block backgraound_color%}class="my-repo-backgraound" {%endblock backgraound_color %}
-
+{%block backgraound_color%}my-repo-backgraound {%endblock backgraound_color %}
+{%block text_color%}my-repo-white{%endblock text_color %}
 {% block main%}
 
 <div class="my-repo-backgraound">

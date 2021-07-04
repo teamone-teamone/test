@@ -8,18 +8,6 @@
 <a class="homelogo" href = "{% url 'test:urlrepository' repository.pk%}">URL repo</a> 
 {%endblock home_logo %}
 
-<form class="search">
-  <button class="img-button" type="submit" name="click" value="">
-    <i class="fas fa-search"></i>
-    </button>
-
-    <input class="keyword" type="text" name="search" maxlength=255 value="" autocomplete="off">
-
-    <select class="SelectSearch" name="WhichSearch">
-      <option id="google" value="google">Google</option>
-      <option id="naver" value="naver">Naver</option>
-    </select>
-</form>
 
 {% block main%}
 

@@ -1,7 +1,7 @@
 {% load i18n %}
 {%load static%}
 <!DOCTYPE html>
-<html lang="en" {%block backgraound_color%} {%endblock backgraound_color %}>
+<html lang="en" class="{%block backgraound_color%} {%endblock backgraound_color %}">
 
 <head>
    <meta charset="UTF-8">
@@ -13,11 +13,12 @@
 </head>
 
 <body >
-   <header>
-   {%block home_logo%}<a href = "{% url 'test:home' %}">URL repo</a> {%endblock home_logo %}
+   <header class="header-box">
+   {%block home_logo%}<a class="homelogo  " href = "{% url 'test:home' %}">URL repo</a> {%endblock home_logo %}
 
    <form class="search">
-      <input class="keyword" type="text" name="search" maxlength= 500 value="" autocomplete="off">
+      <input  class=" header-search-input " type="text" name="search" maxlength= 500 value="" autocomplete="off">
+      
       <button class="img-button" type="submit" name="click" value="">
          <i class="fas fa-search"></i>
       </button>
@@ -25,10 +26,10 @@
    </form>
 
    {% if user.is_authenticated %}
-    {%block userbutton%}<a href = "{% url 'user:myrepo' %}">My page</a>  {%endblock userbutton %}
+    {%block userbutton%}<a href = "{% url 'user:myrepo' %}"><i class="profile-logo fas fa-user-circle"></i></a>  {%endblock userbutton %}
        
     {% else %}
-       <a class="login" href = "{% url 'user:login' %}"><img src="{% static 'image/person.jpg'%}" ></a> 
+       <a class="login" href = "{% url 'user:login' %}"><i class="profile-logo fas fa-user-circle"></i></a> 
     {% endif %}
 
 
