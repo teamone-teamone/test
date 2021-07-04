@@ -236,21 +236,48 @@ header {
   display: flex;
 }
 
-.create_account,
-.login_button,
-.signup_button {
+.create_account{
   background-color: white;
   border: none;
-  color: #2e3e99;
-  padding: 10px 70px;
-  text-align: right;
+  color: #2E3E99;
+  padding: 10px 100px;
+  text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 20px;
-  margin: 5px 5px;
+  font-size: 15px;
+  margin: 30px 0px;
   cursor: pointer;
   border-radius: 60px;
 }
+
+.signup_button{
+  background-color: #2E3E99;
+  border: none;
+  color: white;
+  padding: 10px 90px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 100px 0px;
+  cursor: pointer;
+  border-radius: 60px;
+}
+
+.login_button{
+  background-color: white;
+  border: none;
+  color: #2e3e99;
+  padding: 10px 90px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 100px 0px;
+  cursor: pointer;
+  border-radius: 60px;
+}
+
 
 button.img-button {
   border: none;
@@ -292,17 +319,37 @@ img {
   padding: 15px;
 }
 
-div.left {
+div.login_left{
   width: 50%;
+  height:700px;
   float: left;
   box-sizing: border-box;
 
   background: white;
 }
-div.right {
+
+div.signup_left{
   width: 50%;
+  height:700px;
+  float: left;
+  box-sizing: border-box;
+
+  background: #2e3e99;
+}
+
+div.login_right{
+  width: 50%;
+  height:700px;
   float: right;
   box-sizing: border-box;
 
   background: #2e3e99;
+}
+
+div.signup_right{
+    width: 50%;
+    height:700px;
+    float: right;
+    box-sizing: border-box;
+    background: white;
 }
