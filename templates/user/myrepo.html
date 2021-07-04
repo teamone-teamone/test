@@ -3,26 +3,36 @@
 {% block page_title%}
 {{user.nickname}}
 {%endblock%}
-
+<div>
 {%block userbutton%}
 <a href = "{% url 'user:logout' %}">logout</a>
 {%endblock userbutton %}
-       
+
 
 {%block home_logo%}
 <a href = "{% url 'test:home'%}">URL repo</a> 
 {%endblock home_logo %}
+</div>
 
 {% block main%}
-{% for repo in repolist %}
-<a href = "{% url 'test:urlrepository' repo.pk%}">
-{{repo.title}}
-</a>
-<a href = "{% url 'test:deleterepository' repo.pk%}">
-삭제
-</a>
-<br>
-{% endfor %}
-<a href = "{% url 'test:home'%}">+new repository</a> 
+
+<div>
+    <div class="mysection">
+        <p>MY URL SELVES</p>
+    {% for repo in repolist %}
+    <div class="urls">
+    <a href = "{% url 'test:urlrepository' repo.pk%}">
+    {{repo.title}}
+    </a>
+    <a href = "{% url 'test:deleterepository' repo.pk%}">
+    x
+    </a>
+    <br>
+    </div>
+    {% endfor %}
+    </div>
+    <a href = "{% url 'test:home'%}">+new repository</a> 
+</div>
+
 
 {%endblock%}

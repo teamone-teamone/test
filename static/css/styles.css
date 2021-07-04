@@ -1,3 +1,45 @@
 :root {
-  background-color: azure;
+  background-color: white;
+  margin: 0 auto;
+}
+blockquote {
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 10px 5px 5px gray;
+}
+
+blockquote input {
+  width: 500px;
+}
+
+
+.mysection{
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.title {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.urls{
+  width: 600px;
+  height: 50px;
+  background-color: #C1C5E1;
+  border-radius: 5px;
+  margin: 5px 0;
+  padding: 12px auto;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+}
+
+.urls :hover{
+  background-color: white;
+}
+
+.urls a{
+  text-decoration: none;
+  color: #2E3E99;
 }

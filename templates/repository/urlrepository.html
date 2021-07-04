@@ -15,11 +15,12 @@
   </form>
   </H3>
 <br>
-
+<blockquote>
 <form method="POST" action="{% url 'test:newUrl' repository.pk%}" enctype="multipart/form-data">
   {% csrf_token %} 
-  <input type="text" name="urladdress" maxlength="300" required="" id="id_urladdress" placeholder="New url">
+  <input type="text" name="urladdress" maxlength="300" required="" id="id_urladdress" placeholder="URL을 입력하세요">
   </form>
+</blockquote>
 <br>
 {% for webmark in repository.webmark.all %}
     <form method="POST" action="{% url 'test:changeWebmarkTitle' repository.pk webmark.pk%}" enctype="multipart/form-data">
