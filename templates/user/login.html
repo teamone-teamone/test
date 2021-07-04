@@ -4,12 +4,19 @@
 login
 {%endblock%}
 
+
 {%block home_logo%}
-<a href = "{% url 'test:home'%}">URL repo</a> 
+<a class="homelogo" href = "{% url 'test:home'%}">URL repo</a> 
 {%endblock home_logo %}
 
+
+
 {% block main%}
-<form method="POST" class="w-full" enctype="multipart/form-data">
+<div>
+    <div class="left"></div>
+    <div class="right">
+        <a class="create_account" href="{%url 'user:signup'%}">Sign up</a>
+    <form method="POST" class="w-full" enctype="multipart/form-data">
     {% csrf_token %}
     {% if form.non_field_errors %}
     {% for error in form.non_field_errors %}
@@ -28,12 +35,10 @@ login
     {%endfor%}
 
 
-
-    <button>login</button>
-    <a href="{%url "user:signup"%}">Sign Up</a>
-
-</form>
-
+    <button class="login_button">LOGIN</button>
+    </form>
+    </div>
+</div>
 {%endblock%}
 
 
