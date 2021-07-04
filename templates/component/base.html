@@ -19,7 +19,7 @@
       {%block userbutton%}<a href="{% url 'user:myrepo' %}">My page</a> {%endblock userbutton %}
 
       {% else %}
-      <a href="{% url 'user:login' %}"><img src="../../static/Picture1.png"></a>
+      <a href="{% url 'user:login' %}"><img src="{% static 'Picture1.png'%}"></a>
       {% endif %}
    </header>
    {%block main%}{%endblock main %}
