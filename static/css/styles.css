@@ -148,7 +148,6 @@ blockquote input {
 }
 .delete-btn:hover {
   font-weight: bold;
-  font-size: 25px;
 }
 
 .delete-btn-small {
