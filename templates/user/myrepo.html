@@ -4,14 +4,14 @@
 {{user.nickname}}
 {%endblock%}
 <div>
-{%block userbutton%}
-<a href = "{% url 'user:logout' %}">logout</a>
-{%endblock userbutton %}
+    {%block userbutton%}
+    <a href="{% url 'user:logout' %}">logout</a>
+    {%endblock userbutton %}
 
 
-{%block home_logo%}
-<a href = "{% url 'test:home'%}">URL repo</a> 
-{%endblock home_logo %}
+    {%block home_logo%}
+    <a href="{% url 'test:home'%}">URL repo</a>
+    {%endblock home_logo %}
 </div>
 
 {% block main%}
@@ -19,19 +19,31 @@
 <div>
     <div class="mysection">
         <p>MY URL SELVES</p>
-    {% for repo in repolist %}
-    <div class="urls">
-    <a href = "{% url 'test:urlrepository' repo.pk%}">
-    {{repo.title}}
-    </a>
-    <a href = "{% url 'test:deleterepository' repo.pk%}">
-    x
-    </a>
-    <br>
+        {% for repo in repolist %}
+        <div class="urls">
+            <div class="urlstitle">
+                <a class="repo-title" href="{% url 'test:urlrepository' repo.pk%}">
+                    {{repo.title}}
+                </a>
+            </div>
+            <div class="urlsdelete">
+                <a href="{% url 'test:deleterepository' repo.pk%}">
+                    x
+                </a>
+            </div>
+            <br>
+        </div>
+        {% endfor %}
+        <div class="urls">
+        <div class="urlstitle">
+            <a class="repo-title"href="{% url 'test:home'%}">+new repository</a>
+        </div>
+        <div class="urlsdelete">
+            <a>
+            </a>
+        </div>
+        </div>
     </div>
-    {% endfor %}
-    </div>
-    <a href = "{% url 'test:home'%}">+new repository</a> 
 </div>
 
 

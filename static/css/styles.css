@@ -2,31 +2,55 @@
   background-color: white;
   margin: 0 auto;
 }
+blockquote {
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 10px 5px 5px gray;
+}
+
+blockquote input {
+  width: 500px;
+}
 
 .mysection {
   width: fit-content;
   margin: 0 auto;
 }
 
-.title {
-  width: fit-content;
-  margin: 0 auto;
+.urls {
+  display: flex;
+  flex-direction: row;
+  width: 400px;
+  height: 60px;
 }
 
-.urls {
-  width: 600px;
-  height: 50px;
+.urlstitle:hover {
+  background-color: #2e3e99;
+}
+
+.urlstitle:hover > .repo-title {
+  color: white;
+}
+
+.urlstitle {
+  width: 100%;
   background-color: #c1c5e1;
-  border-radius: 5px;
+  border-radius: 20px;
   margin: 5px 0;
-  padding: 12px auto;
   text-align: center;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  transition: all 0.5s;
+}
+
+.urlsdelete {
+  width: 5%;
+  margin-left: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
   line-height: 50px;
   cursor: pointer;
-}
-
-.urls :hover {
-  background-color: white;
 }
 
 .urls a {
