@@ -1,7 +1,7 @@
 {% load i18n %}
 {%load static%}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" {%block backgraound_color%} {%endblock backgraound_color %}>
 
 <head>
    <meta charset="UTF-8">
@@ -12,7 +12,7 @@
    </title>
 </head>
 
-<body>
+<body >
    <header>
       {%block home_logo%}<a href="{% url 'test:home' %}">URL repo</a> {%endblock home_logo %}
       {% if user.is_authenticated %}

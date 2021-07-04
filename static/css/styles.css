@@ -28,12 +28,13 @@ blockquote input {
   background-color: #2e3e99;
 }
 
-.urlstitle:hover > .repo-title {
+.urlstitle:hover > .my-repo-title {
   color: white;
 }
 
 .urlstitle {
   width: 100%;
+  align-items: center;
   background-color: #c1c5e1;
   border-radius: 20px;
   margin: 5px 0;
@@ -53,9 +54,11 @@ blockquote input {
   cursor: pointer;
 }
 
-.urls a {
+.my-repo-title {
   text-decoration: none;
   color: #2e3e99;
+  padding: 25px;
+  font-weight: bold;
 }
 
 .no-input-box {
@@ -145,6 +148,7 @@ blockquote input {
 }
 .delete-btn:hover {
   font-weight: bold;
+  font-size: 25px;
 }
 
 .delete-btn-small {
@@ -193,4 +197,20 @@ blockquote input {
 
 .add-url:focus {
   box-shadow: none;
+}
+.page-title-box {
+  display: flex;
+}
+.page-title {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: xxx-large;
+  font-weight: bolder;
+  color: white;
+}
+.white {
+  color: white;
+}
+.my-repo-backgraound {
+  background-color: #2e3e99;
 }
