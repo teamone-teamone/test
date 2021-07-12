@@ -35,6 +35,11 @@ urlpatterns = [
         name="deleterepository",
     ),
     path(
+        "changeurltitle/<int:pk_repo>/<int:pk_url>/",
+        views.changeurltitle,
+        name="changeurltitle",
+    ),
+    path(
         "changedescription1/<int:pk_repo>/<int:pk_url>/",
         views.changedescription1,
         name="changedescription1",

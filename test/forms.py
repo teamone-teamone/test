@@ -18,6 +18,14 @@ class ChangeDescription(forms.ModelForm):
         ]
 
 
+class ChangeUrlTitle(forms.ModelForm):
+    class Meta:
+        model = test_models.Url
+        fields = [
+            "urltitle",
+        ]
+
+
 class ChangeWebmarkTitleForm(forms.ModelForm):
     class Meta:
         model = test_models.WebMark
@@ -32,14 +40,4 @@ class ChangeRepositoryTitleForm(forms.ModelForm):
         fields = [
             "title",
         ]
-
-
-# class ContentEditForm(forms.ModelForm):
-#     class Meta:
-#         model = Content
-#         fields = [
-#             "star",
-#             "highlight",
-#             "review",
-#         ]
 

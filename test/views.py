@@ -88,6 +88,20 @@ def deleteUrl(request, pk_repo, pk_url):
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
 
 
+def changeurltitle(request, pk_repo, pk_url):
+    url = get_object_or_404(test_models.Url, pk=pk_url)
+    if request.method == "POST":
+        form = test_forms.ChangeUrlTitle(request.POST)
+        if form.is_valid():
+            urltitle = form.cleaned_data.get("urltitle")
+            url.urltitle = urltitle
+            url.save()
+            return redirect(
+                reverse("test:urlrepository", kwargs={"pk": pk_repo})
+            )
+    return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
+
+
 def changeRepositoryTitle(request, pk):
     repo = get_object_or_404(test_models.Repository, pk=pk)
     if request.method == "POST":

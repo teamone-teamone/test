@@ -40,9 +40,14 @@
   <br>
     {% for url in webmark.url.all %}
     {% comment %} 각각의 url {% endcomment %}
-        <a class="url-title" href="{{url.urladdress}}" target='_blank'>{{url.urltitle}}</a>
-        <a class="delete-btn-small" href="{% url 'test:deleteUrl' repository.pk url.pk %}">
-  x</a>
+    <div class="url-div">
+        <form  method="POST" action="{% url 'test:changeurltitle' repository.pk url.pk%}" enctype="multipart/form-data">
+        {% csrf_token %} 
+          <input class="no-input-box url-title-input" type="text" name="urltitle" maxlength="100" required="" value="{{url.urltitle}}" id="id_urltitle">
+          </form>
+        <a class="url-title" href="{{url.urladdress}}" target='_blank'><i class="fas fa-link"></i></a>
+        <a class="url-delete" href="{% url 'test:deleteUrl' repository.pk url.pk %}">
+  <i class="fas fa-trash-alt"></i></a></div>
   <div class="tag-box">
         <form  method="POST" action="{% url 'test:changedescription1' repository.pk url.pk%}" enctype="multipart/form-data">
         {% csrf_token %} 

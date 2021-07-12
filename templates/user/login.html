@@ -12,11 +12,16 @@ login
 {% block main%}
 <div>
     <div class="login_left">
-        <br><br><h1><span style="color:#2E3E99">Welcome back!</span></h1><br><br>
-        <h3><span style="color:#2E3E99">Log back into your account</span></h3>
+    <div class="login-left-box">
+        <br><br><h1><span class="login-left-mention">Welcome back!</span></h1><br>
+        <div class="login-under-bar"></div>
+        <br>
+       
+        <h3><span class="login-left-mention">Log back into your account</span></h3>
+    </div>
     </div>
     <div class="login_right">
-        <a class="create_account" href="{%url 'user:signup'%}">Sign up</a>
+        
     <form method="POST" class="w-full" enctype="multipart/form-data">
     {% csrf_token %}
     {% if form.non_field_errors %}
@@ -37,6 +42,8 @@ login
 
 
     <button class="login_button">LOGIN</button>
+    <a class="signup_button" href="{%url 'user:signup'%}">Signup</a>
+
     
     </form>
     </div>
