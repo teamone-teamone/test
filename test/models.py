@@ -8,6 +8,9 @@ from user import models as user_models
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
+# importing the module for url title by chans
+from mechanize import Browser
+
 # Create your models here.
 
 
@@ -49,10 +52,13 @@ class Url(core_models.TimeStampedModel):
 
     def geturltitle(self):
         try:
-
-            html = urlopen(self.urladdress)
-            bsObject = BeautifulSoup(html, "html.parser")
-            title = bsObject.find("title").text
-        except:
+            br = Browser()
+            br.set_handle_equiv(False)
+            br.set_handle_robots(False)
+            br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36')]
+            br.open(self.urladdress)
+            title = br.title()
+        except Exception as e:
+            print(e)
             title = self.urladdress
         return title
