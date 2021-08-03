@@ -8,5 +8,5 @@ git clone 이후 runserver까지 해야할 일
 1. git pull
 2. pip install -r requirements.txt
 
-해당 branch는 master입니다.
+해당 branch는 BE입니다.
 팀원은 이곳의 내용을 변경하지 말아주세요.
