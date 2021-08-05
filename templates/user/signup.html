@@ -5,7 +5,7 @@ signup
 {%endblock%}
 
 {%block home_logo%}
-<a class="homelogo" href = "{% url 'test:home'%}">URL repo</a> 
+<a class="homelogo" href="{% url 'test:home'%}">URL repo</a>
 
 {%endblock home_logo %}
 
@@ -13,36 +13,36 @@ signup
 
 <div>
     <div class="signup_left">
-<div class="login-left-box">
-    
-        <br><br><h1><span style="color:white">Welcome to URL repo</span></h1><br><div class="login-under-bar-white"></div><br>
-        <h3><span style="color:white">정보의 홍수 속에서 과제, 팀플, 회사 업무하는 우리는 URL repo 쓴다!</span></h3>
-    </div>
+        <div class="login-left-box">
+
+            <br><br>
+            <h1><span style="color:white">Welcome to URL repo</span></h1><br>
+            <div class="login-under-bar-white"></div><br>
+            <h3><span style="color:white">정보의 홍수 속에서 과제, 팀플, 회사 업무하는 우리는 URL repo 쓴다!</span></h3>
+        </div>
     </div>
     <div class="signup_right">
-        
-    <form method="POST" class="w-full" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% if form.non_field_errors %}
-    {% for error in form.non_field_errors %}
-    <span >{{error}}</span>
-    {% endfor %}
-    {% endif %}
 
-    {% for field in form %}
-    <div>
-    {{field}}</div>
-    {% if field.errors %}
-    {% for error in field.errors %}
-    <span>{{error}}</span>
-    {% endfor %}
-    {% endif %}
-    {%endfor%}
+        <form method="POST" class="w-full" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+            {% endif %}
 
-    <button class="create_account">Create Account</button>
+            {% for field in form %}
+            <div>
+                {{field}}</div>
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+            {% endif %}
+            {%endfor%}
 
-</form>
+            <button class="create_account">Create Account</button>
 
-{%endblock%}
+        </form>
 
-
+        {%endblock%}

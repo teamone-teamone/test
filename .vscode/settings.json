@@ -1,9 +1,18 @@
 {
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#3700ff",
+    "titleBar.inactiveBackground": "#425c8a"
+  },
   "python.formatting.provider": "yapf",
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
+
+  "beautify.language": {
+    "html": ["django-html"]
+  },
   "[django-html]": {
-    "editor.defaultFormatter": "batisteo.vscode-django"
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "HookyQR.beautify"
   },
 
   // django templates에서 emmet, HTML snippet  활성화
