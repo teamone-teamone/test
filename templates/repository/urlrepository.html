@@ -1,227 +1,134 @@
 {% load i18n %} {%load static%}
 <!DOCTYPE html>
-<html
-  lang="en"
-  class="{%block backgraound_color%} {%endblock backgraound_color %}"
->
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
-    />
-    <link rel="stylesheet" href="{% static 'css/styles.css'%}" />
-    <title>{{repository.title}} | URL repo</title>
-  </head>
+<html lang="en" class="{%block backgraound_color%} {%endblock backgraound_color %}">
 
-  <body>
-    <header class="header-box">
-      <a class="homelogo" href="{% url 'test:urlrepository' repository.pk%}"
-        >URL repo</a
-      >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+  <link rel="stylesheet" href="{% static 'css/styles.css'%}" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+  <title>{{repository.title}} | URL repo</title>
+</head>
 
-      <form class="search">
-        <input
-          class="header-search-input"
-          type="text"
-          name="search"
-          maxlength="500"
-          value=""
-          autocomplete="off"
-        />
+<body>
+  <header class="header-box">
+    <a class="homelogo" href="{% url 'test:urlrepository' repository.pk%}">URL repo</a>
 
-        <button class="img-button" type="submit" name="click" value="">
-          <i class="fas fa-search"></i>
-        </button>
-      </form>
+    <form class="search">
+      <input class="header-search-input" type="text" name="search" maxlength="500" value="" autocomplete="off" />
+      <button class="img-button" type="submit" name="click" value="">
+        <span class="material-icons-sharp md-50">
+          search
+        </span>
+      </button>
 
-      {% if user.is_authenticated %}
-      <a href="{% url 'user:myrepo' %}"
-        ><i class="profile-logo fas fa-user-circle"></i
-      ></a>
-      {% else %}
-      <a class="login" href="{% url 'user:login' %}"
-        ><i class="profile-logo fas fa-user-circle"></i
-      ></a>
-      {% endif %}
-    </header>
-
-    <form
-      class="url-input-form"
-      method="POST"
-      action="{% url 'test:newUrl' repository.pk%}"
-      enctype="multipart/form-data"
-    >
-      {% csrf_token %}
-      <input
-        class="no-input-box url-input"
-        type="text"
-        name="urladdress"
-        maxlength="300"
-        required=""
-        id="id_urladdress"
-        placeholder="Enter URL"
-      />
     </form>
+
+    {% if user.is_authenticated %}
+    <a href="{% url 'user:myrepo' %}"><span class="material-icons-sharp md-58">
+        person
+      </span></a>
+    {% else %}
+    <a class="login" href="{% url 'user:login' %}"><span class="material-icons-sharp md-58">
+        person
+      </span></a>
+    {% endif %}
+  </header>
+
+  {% comment %} url 입력 밑 저장소 내용 {% endcomment %}
+  <div class="repo-box">
+    {% comment %} repo title {% endcomment %}
+    <h3>
+      <form class="repo-title-form" method="POST" action="{% url 'test:changeRepositoryTitle' repository.pk %}"
+        enctype="multipart/form-data">
+        {% csrf_token %}
+        <input class="no-input-box repo-title" type="text" name="title" value="" maxlength="50" required=""
+          id="id_title" placeholder="Repo title" />
+      </form>
+    </h3>
     <br />
-    {% comment %} url 입력 밑 저장소 내용 {% endcomment %}
-    <div class="repo-box">
-      {% comment %} repo title {% endcomment %}
-      <h3>
-        <form
-          class="repo-title-form"
-          method="POST"
-          action="{% url 'test:changeRepositoryTitle' repository.pk %}"
-          enctype="multipart/form-data"
-        >
-          {% csrf_token %}
-          <input
-            class="no-input-box repo-title"
-            type="text"
-            name="title"
-            maxlength="50"
-            required=""
-            value="{{repository.title}}"
-            id="id_title"
-          />
-        </form>
-      </h3>
-      <br />
-      {% comment %} 각각의 web mark {% endcomment %}
-      <div class="webmark-container">
-        {% for webmark in repository.webmark.all %}
-        <div class="webmark-box">
-          <div class="webmark-title-box">
-            <form
-              method="POST"
-              action="{% url 'test:changeWebmarkTitle' repository.pk webmark.pk%}"
-              enctype="multipart/form-data"
-            >
-              {% csrf_token %}
-              <input
-                class="no-input-box webmark-title"
-                type="text"
-                name="title"
-                maxlength="50"
-                required=""
-                value="{{webmark.title}}"
-                id="id_title"
-              />
-            </form>
-            <a
-              class="delete-btn"
-              href="{% url 'test:deleteWebmark' repository.pk webmark.pk %}"
-            >
-              x</a
-            >
-          </div>
-          <br />
-          {% for url in webmark.url.all %}
-          <div class="url-div">
-            <form
-              method="POST"
-              action="{% url 'test:changeurltitle' repository.pk url.pk%}"
-              enctype="multipart/form-data"
-            >
-              {% csrf_token %}
-              <input
-                class="no-input-box url-title-input"
-                type="text"
-                name="urltitle"
-                maxlength="100"
-                required=""
-                value="{{url.urltitle}}"
-                id="id_urltitle"
-              />
-            </form>
-            <a class="url-title" href="{{url.urladdress}}" target="_blank"
-              ><i class="fas fa-link"></i
-            ></a>
-            <a
-              class="url-delete"
-              href="{% url 'test:deleteUrl' repository.pk url.pk %}"
-            >
-              <i class="fas fa-trash-alt"></i
-            ></a>
-          </div>
-          <div class="tag-box">
-            <form
-              method="POST"
-              action="{% url 'test:changedescription1' repository.pk url.pk%}"
-              enctype="multipart/form-data"
-            >
-              {% csrf_token %}
-              <input
-                class="no-input-box tag-title"
-                type="text"
-                name="description1"
-                maxlength="10"
-                required=""
-                value="#{{url.description1}}"
-                id="id_description1"
-              />
-            </form>
 
-            {%if url.description1%}
-            <form
-              method="POST"
-              action="{% url 'test:changedescription2' repository.pk url.pk%}"
-              enctype="multipart/form-data"
-            >
-              {% csrf_token %}
-              <input
-                class="no-input-box tag-title"
-                type="text"
-                name="description1"
-                maxlength="10"
-                required=""
-                value="#{{url.description2}}"
-                id="id_description1"
-              />
-            </form>
-            {%if url.description2%}
-            <form
-              method="POST"
-              action="{% url 'test:changedescription3' repository.pk url.pk%}"
-              enctype="multipart/form-data"
-            >
-              {% csrf_token %}
-              <input
-                class="no-input-box tag-title"
-                type="text"
-                name="description1"
-                maxlength="10"
-                required=""
-                value="#{{url.description3}}"
-                id="id_description1"
-              />
-            </form>
-            {% endif %} {% endif %}
-          </div>
-
-          {% endfor %}
-
-          <form
-            method="POST"
-            action="{% url 'test:addUrl' repository.pk webmark.pk%}"
-            enctype="multipart/form-data"
-          >
+    {% comment %} 각각의 web mark {% endcomment %}
+    <div class="webmark-container">
+      {% if repository.webmark.all %}
+      {% for webmark in repository.webmark.all %}
+      <div class="webmark-box">
+        <div class="webmark-title-box">
+          <form method="POST" action="{% url 'test:changeWebmarkTitle' repository.pk webmark.pk%}"
+            enctype="multipart/form-data">
             {% csrf_token %}
-            <input
-              class="no-input-box add-url"
-              type="text"
-              name="urladdress"
-              maxlength="300"
-              required=""
-              id="id_urladdress"
-              placeholder="Add url"
-            />
+            <input class="no-input-box webmark-title" type="text" name="title" maxlength="50" required=""
+              value="{{webmark.title}}" id="id_title" />
           </form>
-          <br />
+          <a class="delete-btn" href="{% url 'test:deleteWebmark' repository.pk webmark.pk %}">
+            x</a>
         </div>
+        <br />
+        {% for url in webmark.url.all %}
+        <div class="url-div">
+          <a class="url-title" href="{{url.urladdress}}" target="_blank"><span class="material-icons-sharp md-30">
+              open_in_new
+            </span></a>
+          <form method="POST" action="{% url 'test:changeurltitle' repository.pk url.pk%}"
+            enctype="multipart/form-data">
+            {% csrf_token %}
+            <input class="no-input-box url-title-input" type="text" name="urltitle" maxlength="100" required=""
+              value="{{url.urltitle}}" id="id_urltitle" />
+          </form>
+          <a class="url-delete" href="{% url 'test:deleteUrl' repository.pk url.pk %}">
+            <span class="material-icons-sharp md-30">
+              delete_outline
+            </span></a>
+        </div>
+        <div class="tag-box">
+          <form method="POST" action="{% url 'test:changedescription1' repository.pk url.pk%}"
+            enctype="multipart/form-data">
+            {% csrf_token %}
+            <input class="no-input-box tag-title" type="text" name="description1" maxlength="10" required=""
+              value="#{{url.description1}}" id="id_description1" />
+          </form>
+
+          {%if url.description1%}
+          <form method="POST" action="{% url 'test:changedescription2' repository.pk url.pk%}"
+            enctype="multipart/form-data">
+            {% csrf_token %}
+            <input class="no-input-box tag-title" type="text" name="description1" maxlength="10" required=""
+              value="#{{url.description2}}" id="id_description1" />
+          </form>
+          {%if url.description2%}
+          <form method="POST" action="{% url 'test:changedescription3' repository.pk url.pk%}"
+            enctype="multipart/form-data">
+            {% csrf_token %}
+            <input class="no-input-box tag-title" type="text" name="description1" maxlength="10" required=""
+              value="#{{url.description3}}" id="id_description1" />
+          </form>
+          {% endif %} {% endif %}
+        </div>
+
         {% endfor %}
+
+        <form method="POST" action="{% url 'test:addUrl' repository.pk webmark.pk%}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input class="no-input-box add-url" type="text" name="urladdress" maxlength="300" required=""
+            id="id_urladdress" placeholder="Add url" />
+        </form>
+        <br />
       </div>
+      {% endfor %}
+      {% else %}
+      <div width="100%">
+        <form class="url-input-form" method="POST" action="{% url 'test:newUrl' repository.pk%}"
+          enctype="multipart/form-data">
+          {% csrf_token %}
+          <input class="no-input-box url-input" type="text" name="urladdress" maxlength="300" required=""
+            id="id_urladdress" placeholder="Copy + Paste URL" />
+        </form>
+      </div>
+      <br />
+      {% endif %}
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
