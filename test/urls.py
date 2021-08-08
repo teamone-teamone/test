@@ -6,6 +6,7 @@ app_name = "test"
 urlpatterns = [
     # path("new/", views.new, name="new"),
     path("", views.home, name="home"),
+    
     path("firsturlpaste/", views.firsturlpaste, name="firsturlpaste"),
     path("newWebmark/<int:pk>/", views.newWebmark, name="newWebmark"),
     path("urlrepository/<int:pk>/", views.urlrepository, name="urlrepository"),
