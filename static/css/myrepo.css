@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.flexbox-search {
+  background: #2e3e99;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: left;
+}
+
+.searchrepo {
+  margin: 30px;
+}
+
+.searchrepo > div {
+  display: inline-block;
+  position: relative;
+  filter: drop-shadow(0 1px #2e3e99);
+}
+
+.searchrepo > div:after {
+  content: "";
+  background: white;
+  width: 4px;
+  height: 20px;
+  position: absolute;
+  top: 40px;
+  right: 2px;
+  transform: rotate(135deg);
+}
+
+.searchrepo > div > input {
+  color: white;
+  font-size: 16px;
+  background: transparent;
+  width: 0.5px;
+  height: 0.5px;
+  padding: 17px;
+  border: solid 3px white;
+  outline: none;
+  border-radius: 35px;
+  transition: width 0.5s;
+}
+
+.searchrepo > div > input::placeholder {
+  color: #efefef;
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.searchrepo > div > input:focus::placeholder {
+  opacity: 1;
+}
+
+.searchrepo > div > input:focus,
+.searchrepo > div > input:not(:placeholder-shown) {
+  width: 250px;
+}
+
+.material-icons.md-30 { 
+    font-size: 30px; 
+    color: white;
+    text-decoration:none;
+  }
+  
+header.header-box {
+    background-color:#2e3e99;
+    padding:15px;
+    
+}
+
+span a {
+    text-decoration: none;
+    color: white;
+}
+
+.header-box-shrink {
+    padding: 10px 0;
+}
+
+

@@ -42,9 +42,24 @@ blockquote input {
 }
 
 .urlstitle {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 23px 8px 8px 24px;
+  position: absolute;
+  width: 523px;
+  height: 123px;
+  left: 142px;
+  top: 512px;
+  background: #FFFFFF;
+  /* 16 dp */
+  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.14), 0px 6px 30px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: background 0.4s ease-in-out;
+}
+  /*width: 100%;
   align-items: center;
-  background-color: #c1c5e1;
+  background-color: white;
   border-radius: 20px;
   margin: 5px 0;
   text-align: center;
@@ -52,7 +67,7 @@ blockquote input {
   cursor: pointer;
   display: flex;
   transition: all 0.5s;
-}
+}*/
 
 .urlsdelete {
   width: 5%;
@@ -245,8 +260,10 @@ blockquote input {
 .header-box {
   display: flex;
   justify-content: space-between;
-
   align-items: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 .homelogo {
@@ -314,7 +331,7 @@ button.img-button {
   color: #78bfe7;
 }
 
-.profile-logo {
+/*.profile-logo {
   font-size: 50px;
   background: linear-gradient(to right, #2e3e99, #78bfe7);
   -webkit-background-clip: text;
@@ -330,21 +347,20 @@ button.img-button {
   margin-right: 15px;
   display: flex;
   flex-direction: column;
-}
+}*/
 
 .header-search-input {
-  border: none;
-
+  border: 2px #2e3e99;
   outline: none;
-  background: transparent;
+  background: white; /*transparent;*/
   width: 800px;
   color: black;
   font-size: 1.063rem;
-  padding: 10px;
-  margin: 10px;
+  padding: 20px;
+  margin: 25px;
   border-bottom: 2px solid;
-  border-radius: 20px;
-  border-image: linear-gradient(to right, #2e3e99, #78bfe7);
+  border-radius: 60px;
+  /*border-image: linear-gradient(to right, #2e3e99, #78bfe7);*/
   border-image-slice: 1;
   margin: 10px;
 }
@@ -422,3 +438,4 @@ div.signup_right {
   box-sizing: border-box;
   background: white;
 }
+
