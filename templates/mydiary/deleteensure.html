@@ -1,7 +1,0 @@
-{% extends 'mydiary/base.html' %} {% block content %} {% load static %}
-<section style="padding: 100px; display:table; margin-left:auto; margin-right:auto;">
-  <div style="padding:100px; text-align: center;"> <h1>정말 {{post.title}}을 삭제하시겠습니까? </h1></div>
-  
-  <a href="{%url 'delete' post.pk%}"style="display:table; margin-left:auto; margin-right:auto;" ><button type="submit" class="btn btn-danger">삭제하기</button></a>
-</section>
-{%endblock %}

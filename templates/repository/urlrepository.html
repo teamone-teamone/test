@@ -10,14 +10,17 @@
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+      
     />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css'%}" />
     <title>{{repository.title}} | URL repo</title>
   </head>
 
   <body>
     <header class="header-box">
-      <a class="homelogo" href="{% url 'test:urlrepository' repository.pk%}"
+      <a class="homelogo" href="{% url 'test:home' %}"
         >URL repo</a
       >
 
@@ -47,24 +50,7 @@
       {% endif %}
     </header>
 
-    <form
-      class="url-input-form"
-      method="POST"
-      action="{% url 'test:newUrl' repository.pk%}"
-      enctype="multipart/form-data"
-    >
-      {% csrf_token %}
-      <input
-        class="no-input-box url-input"
-        type="text"
-        name="urladdress"
-        maxlength="300"
-        required=""
-        id="id_urladdress"
-        placeholder="Enter URL"
-      />
-    </form>
-    <br />
+    
     {% comment %} url 입력 밑 저장소 내용 {% endcomment %}
     <div class="repo-box">
       {% comment %} repo title {% endcomment %}
@@ -148,56 +134,21 @@
           <div class="tag-box">
             <form
               method="POST"
-              action="{% url 'test:changedescription1' repository.pk url.pk%}"
+              action="{% url 'test:changedescription' repository.pk url.pk%}"
               enctype="multipart/form-data"
             >
               {% csrf_token %}
               <input
                 class="no-input-box tag-title"
                 type="text"
-                name="description1"
-                maxlength="10"
+                name="description"
+                maxlength="100"
                 required=""
-                value="#{{url.description1}}"
-                id="id_description1"
+                value="{{url.description}}"
+                id="id_description"
               />
             </form>
 
-            {%if url.description1%}
-            <form
-              method="POST"
-              action="{% url 'test:changedescription2' repository.pk url.pk%}"
-              enctype="multipart/form-data"
-            >
-              {% csrf_token %}
-              <input
-                class="no-input-box tag-title"
-                type="text"
-                name="description1"
-                maxlength="10"
-                required=""
-                value="#{{url.description2}}"
-                id="id_description1"
-              />
-            </form>
-            {%if url.description2%}
-            <form
-              method="POST"
-              action="{% url 'test:changedescription3' repository.pk url.pk%}"
-              enctype="multipart/form-data"
-            >
-              {% csrf_token %}
-              <input
-                class="no-input-box tag-title"
-                type="text"
-                name="description1"
-                maxlength="10"
-                required=""
-                value="#{{url.description3}}"
-                id="id_description1"
-              />
-            </form>
-            {% endif %} {% endif %}
           </div>
 
           {% endfor %}
@@ -222,6 +173,12 @@
         </div>
         {% endfor %}
       </div>
+      <a href="{% url 'test:newWebmark' repository.pk %}">
+      
+      <span class="material-icons">
+add_circle_outline
+</span>
+      </a>
     </div>
   </body>
 </html>

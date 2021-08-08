@@ -1,0 +1,71 @@
+{% load i18n %} {% load static %}
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="{%block backgraound_color%} {%endblock backgraound_color %}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}" />
+    <title>{{repository.title}} | URL repo</title>
+  </head>
+
+  <body>
+    <header class="header-box">
+      <a class="homelogo" href="{% url 'test:home'%}"
+        >URL repo</a
+      >
+
+      <form class="search">
+        <input
+          class="header-search-input"
+          type="text"
+          name="search"
+          maxlength="500"
+          value=""
+          autocomplete="off"
+        />
+
+        <button class="img-button" type="submit" name="click" value="">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+
+      {% if user.is_authenticated %}
+      <a href="{% url 'user:myrepo' %}"
+        ><i class="profile-logo fas fa-user-circle"></i
+      ></a>
+      {% else %}
+      <a class="login" href="{% url 'user:login' %}"
+        ><i class="profile-logo fas fa-user-circle"></i
+      ></a>
+      {% endif %}
+    </header>
+
+    <form
+      class="url-input-form"
+      method="POST"
+      action="{% url 'test:firsturlpaste' %}"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <input
+        class="no-input-box url-input"
+        type="text"
+        name="urladdress"
+        maxlength="300"
+        required=""
+        id="id_urladdress"
+        placeholder="Enter URL"
+      />
+    </form>
+    <br />
+    {% comment %} url 입력 밑 저장소 내용 {% endcomment %}
+    
+  </body>
+</html>

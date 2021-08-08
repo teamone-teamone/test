@@ -7,16 +7,29 @@ from django.contrib.auth import authenticate
 
 # Create your views here.
 
-
 def home(request):
+  return render(request, "repository/repositoryhome.html")
 
+
+def firsturlpaste(request):
     newRepository = test_models.Repository.objects.create()
     if request.user.is_authenticated:
         newRepository.for_user = request.user
         newRepository.save()
+
+    if request.method == "POST":
+        form = test_forms.NewUrlForm(request.POST)
+        if form.is_valid():
+            url = form.save(commit=False)
+            newWebmark = test_models.WebMark.objects.create(for_repository=newRepository)
+            url.for_webmark = newWebmark
+            url.urltitle = url.geturltitle()
+            url.save()
+            return redirect(reverse("test:urlrepository", kwargs={"pk": newRepository.pk}))
     return redirect(
         reverse("test:urlrepository", kwargs={"pk": newRepository.pk})
     )
+
 
 
 def urlrepository(request, pk):
@@ -33,17 +46,9 @@ def deleterepository(request, pk):
     return redirect(reverse("user:myrepo"))
 
 
-def newUrl(request, pk):
+def newWebmark(request, pk):
     repo = get_object_or_404(test_models.Repository, pk=pk)
-    if request.method == "POST":
-        form = test_forms.NewUrlForm(request.POST)
-        if form.is_valid():
-            url = form.save(commit=False)
-            newWebmark = test_models.WebMark.objects.create(for_repository=repo)
-            url.for_webmark = newWebmark
-            url.urltitle = url.geturltitle()
-            url.save()
-            return redirect(reverse("test:urlrepository", kwargs={"pk": pk}))
+    test_models.WebMark.objects.create(for_repository=repo)
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk}))
 
 
@@ -114,46 +119,16 @@ def changeRepositoryTitle(request, pk):
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk}))
 
 
-def changedescription1(request, pk_repo, pk_url):
+def changedescription(request, pk_repo, pk_url):
     url = get_object_or_404(test_models.Url, pk=pk_url)
     if request.method == "POST":
         form = test_forms.ChangeDescription(request.POST)
         if form.is_valid():
-            description1 = form.cleaned_data.get("description1")
-            description1 = description1.replace("#", "")
-            url.description1 = description1
+            description = form.cleaned_data.get("description")
+            url.description = description
             url.save()
             return redirect(
                 reverse("test:urlrepository", kwargs={"pk": pk_repo})
             )
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
 
-
-def changedescription2(request, pk_repo, pk_url):
-    url = get_object_or_404(test_models.Url, pk=pk_url)
-    if request.method == "POST":
-        form = test_forms.ChangeDescription(request.POST)
-        if form.is_valid():
-            description2 = form.cleaned_data.get("description1")
-            description2 = description2.replace("#", "")
-            url.description2 = description2
-            url.save()
-            return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo})
-            )
-    return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
-
-
-def changedescription3(request, pk_repo, pk_url):
-    url = get_object_or_404(test_models.Url, pk=pk_url)
-    if request.method == "POST":
-        form = test_forms.ChangeDescription(request.POST)
-        if form.is_valid():
-            description3 = form.cleaned_data.get("description1")
-            description3 = description3.replace("#", "")
-            url.description3 = description3
-            url.save()
-            return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo})
-            )
-    return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))

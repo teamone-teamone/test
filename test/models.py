@@ -46,9 +46,7 @@ class Url(core_models.TimeStampedModel):
     )
     urltitle = models.CharField(max_length=100, default="")
     urladdress = models.CharField(max_length=300, default="")
-    description1 = models.CharField(max_length=10, default="")
-    description2 = models.CharField(max_length=10, default="")
-    description3 = models.CharField(max_length=10, default="")
+    description = models.CharField(max_length=500, default="")
 
     def geturltitle(self):
         try:
