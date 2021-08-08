@@ -69,12 +69,12 @@
         {% for url in webmark.url.all %}
         <div class="url-div">
           <div class="url-div-first">
-            <div class="url-div-first-child">
+            <div class="url-div-first-child flex1">
               <a class="url-title" href="{{url.urladdress}}" target="_blank"><span class="material-icons-sharp md-30">
                 open_in_new
               </span></a>
             </div>
-            <div class="url-div-first-child">
+            <div class="url-div-first-child flex4">
               <form method="POST" action="{% url 'test:changeurltitle' repository.pk url.pk%}"
               enctype="multipart/form-data">
               {% csrf_token %}
@@ -82,17 +82,16 @@
                 value="{{url.urltitle}}" id="id_urltitle" />
             </form>
             </div>
-            <div class="url-div-first-child">
-              <a class="toggle" href="">
+            <div class="url-div-first-child flex1">
+              
                 <span class="material-icons-sharp md-30">
                   arrow_drop_down
-                  </span></a>
+                  </span>
             </div>
-            <div class="url-div-first-child">
-              <a class="url-delete" href="{% url 'test:deleteUrl' repository.pk url.pk %}">
+            <div class="url-div-first-child flex1 ">
                 <span class="material-icons-sharp md-30">
                   delete_outline
-                </span></a>
+                </span>
             </div>
           </div>
           <div>
@@ -100,8 +99,8 @@
               <form method="POST" action="{% url 'test:changedescription1' repository.pk url.pk%}"
                 enctype="multipart/form-data">
                 {% csrf_token %}
-                <input class="no-input-box tag-title" type="text" name="description1" maxlength="10" required=""
-                  value="#{{url.description1}}" id="id_description1" />
+                <input class="no-input-box tag-title" type="text" name="description1" maxlength="100" required=""
+                  value="{{url.description1}}" id="id_description1" />
               </form>
             </div>
           </div>

@@ -183,6 +183,7 @@ blockquote input {
 .url-div-first-child {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .material-icons-sharp.md-30 {
@@ -195,6 +196,9 @@ blockquote input {
   color: #2e3e99;
   margin-left: 5%;
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .url-title-input {
@@ -219,7 +223,7 @@ blockquote input {
   font-size: small;
   color:#2e3e99;
   text-align: center;
-  width: 70px;
+  width: 100%;
 }
 
 
@@ -461,4 +465,12 @@ div.signup_right {
   float: right;
   box-sizing: border-box;
   background: white;
+}
+
+.flex1{
+  flex: 1
+}
+
+.flex4{
+  flex: 4
 }
