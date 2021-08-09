@@ -12,35 +12,39 @@ signup
 {% block main%}
 
 <div>
-    <div class="signup_left">
-        <div class="login-left-box">
+  <div class="signup_left">
+    <div class="login-left-box">
 
-            <br><br>
-            <h1><span style="color:white">그래픽 들어감</span></h1><br>
-        </div>
+      <br><br>
+      <h1><span style="color:white">그래픽 들어감</span></h1><br>
     </div>
-    <div class="signup_right">
+  </div>
+  <div class="signup_right">
 
-        <form method="POST" class="w-full" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-            <span>{{error}}</span>
-            {% endfor %}
-            {% endif %}
+    <form method="POST" class="w-full" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+      <span>{{error}}</span>
+      {% endfor %}
+      {% endif %}
+      {{form.nickname}}
+      <input type="text" name="nickname" placeholder="nickname" maxlength="50" required="" id="id_nickname">
+      {% for field in form %}
+      {% if field.name == "nickname"%}
+      {%else%}
+      <div>
+        {{field}}</div>
+      {% endif %}
+      {% if field.errors %}
+      {% for error in field.errors %}
+      <span>{{error}}</span>
+      {% endfor %}
+      {% endif %}
+      {%endfor%}
 
-            {% for field in form %}
-            <div>
-                {{field}}</div>
-            {% if field.errors %}
-            {% for error in field.errors %}
-            <span>{{error}}</span>
-            {% endfor %}
-            {% endif %}
-            {%endfor%}
+      <button class="create_account">Create Account</button>
 
-            <button class="create_account">Create Account</button>
+    </form>
 
-        </form>
-
-        {%endblock%}
+    {%endblock%}

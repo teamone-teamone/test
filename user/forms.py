@@ -4,12 +4,10 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(
-        widget=forms.EmailInput(attrs={"placeholder": "Email"})
-    )
-    password = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": "Passward"})
-    )
+    email = forms.EmailField(widget=forms.EmailInput(
+        attrs={"placeholder": "Email"}))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={"placeholder": "Passward"}))
 
     def clean(self):
         email = self.cleaned_data.get("email")
@@ -19,9 +17,8 @@ class LoginForm(forms.Form):
             if user.check_password(password):
                 return self.cleaned_data
             else:
-                self.add_error(
-                    "password", forms.ValidationError("비밀번호가 틀렸습니다.")
-                )
+                self.add_error("password",
+                               forms.ValidationError("비밀번호가 틀렸습니다."))
         except models.User.DoesNotExist:
             self.add_error("email", forms.ValidationError("존재하지 않는 사용자입니다."))
 
@@ -35,12 +32,10 @@ class SignUpForm(forms.ModelForm):
             "email": forms.EmailInput(attrs={"placeholder": "Email"}),
         }
 
-    password = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": "Password"})
-    )
-    password1 = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"})
-    )
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={"placeholder": "Password"}))
+    password1 = forms.CharField(widget=forms.PasswordInput(
+        attrs={"placeholder": "Confirm Password"}))
     field_order = [
         "nickname",
         "email",
@@ -52,7 +47,7 @@ class SignUpForm(forms.ModelForm):
         email = self.cleaned_data["email"]
         try:
             models.User.objects.get(username=email)
-            raise forms.ValidationError("*이미 존제하는 이메일입니다.")
+            raise forms.ValidationError("이미 존제하는 이메일입니다.")
         except models.User.DoesNotExist:
             return email
 
@@ -60,7 +55,7 @@ class SignUpForm(forms.ModelForm):
         password = self.cleaned_data.get("password")
         password1 = self.cleaned_data["password1"]
         if password != password1:
-            raise forms.ValidationError("*확인 비밀번호가 같지 않습니다.")
+            raise forms.ValidationError("확인 비밀번호가 같지 않습니다.")
         else:
             return password
 
@@ -68,6 +63,8 @@ class SignUpForm(forms.ModelForm):
         user = super().save(commit=False)
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
+        nickname = self.cleaned_data.get("nickname")
+        user.nickname = nickname
         user.username = email
         user.set_password(password)
         user.save()

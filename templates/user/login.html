@@ -2,86 +2,91 @@
 <!DOCTYPE html>
 <html lang="en" class="{%block backgraound_color%} {%endblock backgraound_color %}">
 
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/login.css'%}" />
     <title>Sign in & up| URL repo</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="header-box">
-        <a class="homelogo" href="{% url 'test:home'%}">로고 들어감</a>
-        {% if user.is_authenticated %}
-        <a href="{% url 'user:myrepo' %}"><i class="profile-logo fas fa-user-circle"></i></a>
-        {% else %}
-        <a class="login" href="{% url 'user:login' %}"><i class="profile-logo fas fa-user-circle"></i></a>
-        {% endif %}
+      <a class="homelogo" href="{% url 'test:home'%}">로고 들어감</a>
     </header>
-    {% comment %} {% endcomment %}
+    <div class="main">
+      <div class="login-left"></div>
 
-    <div class="login-left">
-    </div>
-    
-    <div class="login-right">
+      <div class="login-right">
         <div class="box">
-            <div id ="signup" class="button-box-2">
-                <button id = "login" type="button" class="signin-btn-2 underlineHover-2" onclick="login()">Sign in</button>
-                <button id = "register" type="button" class="signup-btn-2 underlineHover-2" onclick="register()">Sign up</button>
-                <form class="input-form-2">
-                    <input type="text" class="input-field-2" placeholder="User Name">
-                    <input type="email" class="input-field-2" placeholder="Email">
-                    <input type="text" class="input-field-2" placeholder="Password">
-                    <button type="submit" class="register-btn">REGISTER</button>
-                </form>
-            </div>
-        </div>
-        <div class="box">
-            <div id ="signin" class="button-box">
-                <button id = "login" type="button" class="signin-btn underlineHover" onclick="login()">Sign in</button>
-                <button id = "register" type="button" class="signup-btn underlineHover" onclick="register()">Sign up</button>
-                <form class="input-form">
-                    <input type="email" class="input-field" placeholder="Email">
-                    <input type="text" class="input-field" placeholder="Password">
-                    <p class="login-error">
-                        <span class="material-icons-sharp error">error</span>
-                        &ensp;please enter a correct username and password</p>
-                    <button type="submit" class="login-btn">LOGIN</button>
-                </form>
-            </div>
-        </div>
-    </div>
+          <div id="signup" class="button-box-2  {% if not isLogin %} dp-block{% endif %}">
+            <button id="login" type="button" class="signin-btn-2 underlineHover-2" onclick="login()">
+              Sign in
+            </button>
+            <button id="register" type="button" class="signup-btn-2 underlineHover-2" onclick="register()">
+              Sign up
+            </button>
+            <form method="POST" class="input-form-2">
+              {% csrf_token %}
+              <input type="text" class="input-field-2" placeholder="User Name" name="nickname"
+                {% if  signup_info.nickname %} value={{signup_info.nickname}}{% endif %} />
+              <input type="email" class="input-field-2" placeholder="Email" name="email" {% if  signup_info.email %}
+                value={{signup_info.email}}{% endif %} />
+              <input type="password" class="input-field-2" placeholder="Password" name="password" />
+              <input type="password" class="input-field-2" placeholder="Confirm Password" name="password1" />
+              {% if  signup_error%}
 
-    <script>
-        var x = document.getElementById("signin");
-        var y = document.getElementById("signup");
-
-        function register(){
-            x.style.display="none"
-            y.style.display = "block"
-        }
-
-        function login(){
-            x.style.display = "block"
-            y.style.display = "none"
-        }
-
-    </script>
-
-        <!--input으로 작업한 것을 아래와 연결해야 함
-            <form method="POST" class="w-full" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                <span>{{error}}</span>
-                {% endfor %} {% endif %} {% for field in form %}
-                <div>{{field}}</div>
-                {% if field.errors %} {% for error in field.errors %}
-                <span>{{error}}</span>
-                {% endfor %} {% endif %} {% endfor %}
+              <p class="login-error">
+                <span class="material-icons-sharp error">error</span>
+                {{signup_error}}
+              </p>
+              {% endif %}
+              <button type="submit" class="register-btn">REGISTER</button>
             </form>
-        -->
-</body>
+          </div>
+        </div>
+
+        <div class="box">
+          <div id="signin" class="button-box {% if isLogin %} dp-block{% endif %}">
+            <button id="login" type="button" class="signin-btn underlineHover" onclick="login()">
+              Sign in
+            </button>
+            <button id="register" type="button" class="signup-btn underlineHover" onclick="register()">
+              Sign up
+            </button>
+            <form method="POST" class="input-form" name="123">
+              {% csrf_token %}
+              <input type="email" class="input-field" placeholder="Email" name="email" {% if  login_info.email %}
+                value={{login_info.email}}{% endif %} />
+              <input type="password" class="input-field" placeholder="Password" name="password" />
+              {% if  login_error%}
+
+              <p class="login-error">
+                <span class="material-icons-sharp error">error</span>
+                {{login_error}}
+              </p>
+              {% endif %}
+              <button type="submit" class="login-btn">LOGIN</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <script>
+      var singin = document.getElementById("signin");
+      var signup = document.getElementById("signup");
+
+      function register() {
+        singin.style.display = "none";
+        signup.style.display = "block";
+      }
+
+      function login() {
+        singin.style.display = "block";
+        signup.style.display = "none";
+      }
+    </script>
+  </body>
 
 </html>
