@@ -4,10 +4,12 @@ from . import views
 app_name = "test"
 
 urlpatterns = [
-    path("", views.home, name="home"),
     # path("new/", views.new, name="new"),
+    path("", views.home, name="home"),
+    
+    path("firsturlpaste/", views.firsturlpaste, name="firsturlpaste"),
+    path("newWebmark/<int:pk>/", views.newWebmark, name="newWebmark"),
     path("urlrepository/<int:pk>/", views.urlrepository, name="urlrepository"),
-    path("newUrl/<int:pk>/", views.newUrl, name="newUrl"),
     path("addUrl/<int:pk_repo>/<int:pk_web>/", views.addUrl, name="addUrl"),
     path(
         "changeWebmarkTitle/<int:pk_repo>/<int:pk_web>/",
@@ -40,18 +42,8 @@ urlpatterns = [
         name="changeurltitle",
     ),
     path(
-        "changedescription1/<int:pk_repo>/<int:pk_url>/",
-        views.changedescription1,
-        name="changedescription1",
-    ),
-    path(
-        "changedescription2/<int:pk_repo>/<int:pk_url>/",
-        views.changedescription2,
-        name="changedescription2",
-    ),
-    path(
-        "changedescription3/<int:pk_repo>/<int:pk_url>/",
-        views.changedescription3,
-        name="changedescription3",
+        "changedescription/<int:pk_repo>/<int:pk_url>/",
+        views.changedescription,
+        name="changedescription",
     ),
 ]

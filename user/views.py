@@ -54,6 +54,7 @@ def signup(request):
 
 
 def myrepo(request):
-    repolist = test_models.Repository.objects.filter(for_user=request.user)
+    
+    search = request.GET.get('search-myrepo', '')
+    repolist = test_models.Repository.objects.filter(for_user=request.user).filter(title__icontains=search)
     return render(request, "user/myrepo.html", {"repolist": repolist,})
-

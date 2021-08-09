@@ -5,23 +5,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
-    <link rel="stylesheet" href="{% static 'css/styles.css'%}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/login.css'%}" />
     <title>Sign in & up| URL repo</title>
 </head>
 
 <body>
     <header class="header-box">
         <a class="homelogo" href="{% url 'test:home'%}">URL repo</a>
-
-        <form class="search">
-            <input class="header-search-input" type="text" name="search" maxlength="500" value="" autocomplete="off" />
-
-            <button class="img-button" type="submit" name="click" value="">
-                <i class="fas fa-search"></i>
-            </button>
-        </form>
-
         {% if user.is_authenticated %}
         <a href="{% url 'user:myrepo' %}"><i class="profile-logo fas fa-user-circle"></i></a>
         {% else %}
@@ -33,18 +24,26 @@
     <div>
         <div class="login_left">
             <div class="login-left-box">
-                <br /><br />
-                <h1><span class="login-left-mention">Welcome back!</span></h1>
-                <br />
-                <div class="login-under-bar"></div>
-                <br />
-
-                <h3>
-                    <span class="login-left-mention">Log back into your account</span>
-                </h3>
+                <h1><span class="login-left-mention">그래픽 들어감</span></h1>
             </div>
         </div>
         <div class="login_right">
+            <h2 class ="signin_button">Sign In</h2>
+            <a class="signup_button underlinehover" href="{%url 'user:signup'%}">Signup</a>
+            <div class="login_form">
+                <div class="login_email">
+                    <input type="text" placeholder="Email">
+                </div>
+                <div class="login_password">
+                    <input type="text" class="login_password" name="login" placeholder="password">
+                </div>
+                <div class="submit">
+                    <button class="login_button">LOGIN</button>
+                </div>
+            </div>
+        </div>
+
+        <!--input으로 작업한 것을 아래와 연결해야 함
             <form method="POST" class="w-full" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% if form.non_field_errors %}
@@ -55,10 +54,8 @@
                 {% if field.errors %} {% for error in field.errors %}
                 <span>{{error}}</span>
                 {% endfor %} {% endif %} {% endfor %}
-
-                <button class="login_button">LOGIN</button>
-                <a class="signup_button" href="{%url 'user:signup'%}">Signup</a>
             </form>
+        -->
         </div>
     </div>
 </body>
