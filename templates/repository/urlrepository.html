@@ -69,12 +69,12 @@
         {% for url in webmark.url.all %}
         <div class="url-div">
           <div class="url-div-first">
-            <div class="url-div-first-child">
+            <div class="url-div-first-child flex1">
               <a class="url-title" href="{{url.urladdress}}" target="_blank"><span class="material-icons-sharp md-30">
                 open_in_new
               </span></a>
             </div>
-            <div class="url-div-first-child">
+            <div class="url-div-first-child flex4">
               <form method="POST" action="{% url 'test:changeurltitle' repository.pk url.pk%}"
               enctype="multipart/form-data">
               {% csrf_token %}
@@ -82,41 +82,44 @@
                 value="{{url.urltitle}}" id="id_urltitle" />
             </form>
             </div>
-            <div class="url-div-first-child">
+            <div class="url-div-first-child flex1">
               <a class="toggle" href="">
                 <span class="material-icons-sharp md-30">
                   arrow_drop_down
                   </span></a>
             </div>
-            <div class="url-div-first-child">
+            <div class="url-div-first-child flex1">
               <a class="url-delete" href="{% url 'test:deleteUrl' repository.pk url.pk %}">
                 <span class="material-icons-sharp md-30">
                   delete_outline
                 </span></a>
             </div>
           </div>
-          <div>
-            <div class="tag-box">
+          <div class="url-div-second">
+            <div class="url-div-second-child flex1">
+
+            </div>
+            <div class="url-div-second-child flex6">
               <form method="POST" action="{% url 'test:changedescription1' repository.pk url.pk%}"
                 enctype="multipart/form-data">
                 {% csrf_token %}
                 <input class="no-input-box tag-title" type="text" name="description1" maxlength="10" required=""
-                  value="#{{url.description1}}" id="id_description1" />
+                  value="{{url.description1}}" id="id_description1" />
               </form>
             </div>
           </div>
         </div>
-
-        {% endfor %}
         <div class="add-url-div">
+          <div class="add-url-div-child">
             <form method="POST" action="{% url 'test:addUrl' repository.pk webmark.pk%}" enctype="multipart/form-data">
               {% csrf_token %}
               <input class="no-input-box add-url" type="text" name="urladdress" maxlength="300" required=""
                 id="id_urladdress" placeholder="Add url" />
             </form>
         <br />
+          </div>
         </div>
-      {% endfor %}
+        {% endfor %} {% endfor %}
       {% else %}
       <div>
         <form class="url-input-form" method="POST" action="{% url 'test:newUrl' repository.pk%}"
