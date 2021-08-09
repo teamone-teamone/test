@@ -1,53 +1,66 @@
-{%extends "component/base.html"%}
+{% load i18n %} {% load static %}
+<!DOCTYPE html>
+<html lang="en" class="{%block backgraound_color%} {%endblock backgraound_color %}">
 
-{% block page_title%}
-login
-{%endblock%}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}" />
+    <title>Sign in & up| URL repo</title>
+</head>
 
+<body>
+    <header class="header-box">
+        <a class="homelogo" href="{% url 'test:home'%}">URL repo</a>
 
-{%block home_logo%}
-<a class="homelogo" href = "{% url 'test:home'%}">URL repo</a> 
-{%endblock home_logo %}
+        <form class="search">
+            <input class="header-search-input" type="text" name="search" maxlength="500" value="" autocomplete="off" />
 
-{% block main%}
-<div>
-    <div class="login_left">
-    <div class="login-left-box">
-        <br><br><h1><span class="login-left-mention">Welcome back!</span></h1><br>
-        <div class="login-under-bar"></div>
-        <br>
-       
-        <h3><span class="login-left-mention">Log back into your account</span></h3>
-    </div>
-    </div>
-    <div class="login_right">
-        
-    <form method="POST" class="w-full" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% if form.non_field_errors %}
-    {% for error in form.non_field_errors %}
-    <span >{{error}}</span>
-    {% endfor %}
-    {% endif %}
+            <button class="img-button" type="submit" name="click" value="">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
 
-    {% for field in form %}
+        {% if user.is_authenticated %}
+        <a href="{% url 'user:myrepo' %}"><i class="profile-logo fas fa-user-circle"></i></a>
+        {% else %}
+        <a class="login" href="{% url 'user:login' %}"><i class="profile-logo fas fa-user-circle"></i></a>
+        {% endif %}
+    </header>
+    {% comment %} {% endcomment %}
+
     <div>
-    {{field}}</div>
-    {% if field.errors %}
-    {% for error in field.errors %}
-    <span>{{error}}</span>
-    {% endfor %}
-    {% endif %}
-    {%endfor%}
+        <div class="login_left">
+            <div class="login-left-box">
+                <br /><br />
+                <h1><span class="login-left-mention">Welcome back!</span></h1>
+                <br />
+                <div class="login-under-bar"></div>
+                <br />
 
+                <h3>
+                    <span class="login-left-mention">Log back into your account</span>
+                </h3>
+            </div>
+        </div>
+        <div class="login_right">
+            <form method="POST" class="w-full" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <span>{{error}}</span>
+                {% endfor %} {% endif %} {% for field in form %}
+                <div>{{field}}</div>
+                {% if field.errors %} {% for error in field.errors %}
+                <span>{{error}}</span>
+                {% endfor %} {% endif %} {% endfor %}
 
-    <button class="login_button">LOGIN</button>
-    <a class="signup_button" href="{%url 'user:signup'%}">Signup</a>
-
-    
-    </form>
+                <button class="login_button">LOGIN</button>
+                <a class="signup_button" href="{%url 'user:signup'%}">Signup</a>
+            </form>
+        </div>
     </div>
-</div>
-{%endblock%}
+</body>
 
-
+</html>

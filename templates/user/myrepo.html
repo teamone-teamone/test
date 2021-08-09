@@ -1,51 +1,118 @@
-{%extends "component/base.html"%}
+{% load i18n %} {%load static%}
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="{%block backgraound_color%} {%endblock backgraound_color %}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    />
+    <link href="https://use.fontawesome.com/releases/v5.0.3/css/all.css" 
+          rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-{% block page_title%}
-{{user.nickname}}
-{%endblock%}
-    {%block userbutton%}
-    <a class="logout" href="{% url 'user:logout' %}"><i class="profile-logo fas fa-user-circle"></i>logout</a>
-    {%endblock userbutton %}
+    <!--<link rel="stylesheet" href="{% static 'css/styles.css'%}" />-->
+    <link rel="stylesheet" href="{% static 'css/myrepo.css'%}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet" />
+      <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 반응형 웹 위한 가로폭조정-->
+    <title>{{user.nickname}} | URL repo</title>
+  </head>
 
+  <body>
+    <header class="header-box">
+     <!-- <a class="homelogo" href="{% url 'test:home'%}">URL repo</a> -->
+     
+      <span class="material-icons md-30"> 
+        <a href="javascript:history.back()">
+          arrow_back_ios_new
+        </a>
+      </span>
+      
+      <div class="flexbox-search">
+        <div class="searchrepo">
+          <div>
+            <input type="text" placeholder="Search" required>
+          </div>
+        </div>
+      </div>
 
-    {%block home_logo%}
-    <a class="homelogo" href="{% url 'test:home'%}">URL repo</a>
-    {%endblock home_logo %}
-{%block backgraound_color%}my-repo-backgraound {%endblock backgraound_color %}
-{%block text_color%}my-repo-white{%endblock text_color %}
-{% block main%}
+      <span class="material-icons md-30">
+        <a href="{% url 'user:logout' %}"> <!--class="logout"-->
+          person
+        </a>
+      </span>  
+      <!--<a class="logout" href="{% url 'user:logout' %}"><i class="profile-logo fas fa-user-circle"></i>logout</a> -->
+    </header>
+    
 
-<div class="my-repo-backgraound">
-    <div class="mysection">
-    <div class="page-title-box">
-        <p class="page-title">MY URL SELVES</p>
+    <div class="my-repo-backgraound">
+      <div class="mysection">
+        <div class="page-title-box">
+          <p class="page-title">MY URL SELVES</p>
+        </div>
+
+        <div class="search">
+          <form>
+            <input 
+              class="header-search-input"
+              type="text" 
+              name="search" 
+              maxlength="500"
+              value=""
+              placeholder="Search UR repo"
+              autocomplete="off"
+            />
+            <button class="searchrepo-button" type="submit" name="click" value="">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>  
+
+        
+        <br><br>
+      </div>
     </div>
+     
+      <div class="url-background">
         {% for repo in repolist %}
         <div class="urls">
-            <div class="urlstitle">
-                <a class="my-repo-title" href="{% url 'test:urlrepository' repo.pk%}">
-                    {{repo.title}}
-                </a>
-            </div>
-            <div class="urlsdelete">
-                <a class="delete-btn white" href="{% url 'test:deleterepository' repo.pk%}">
-                    x
-                </a>
-            </div>
-            <br>
+          <div class="urlstitle">
+            <a
+              class="my-repo-title"
+              href="{% url 'test:urlrepository' repo.pk%}"
+            >
+              {{repo.title}}
+            </a>
+          </div>
+          <div class="urlsdelete">
+            <a
+              class="delete-btn"
+              href="{% url 'test:deleterepository' repo.pk%}"
+            >
+              x
+            </a>
+          </div>
+          <br />
         </div>
         {% endfor %}
+
         <div class="urls">
-        <div class="urlstitle">
-            <a class="my-repo-title"href="{% url 'test:home'%}">+ new repository</a>
-        </div>
-        <div class="urlsdelete">
-            <a>
-            </a>
-        </div>
-        </div>
-    </div>
-</div>
-
-
-{%endblock%}
+          <div class="urlstitle">
+            <a class="my-repo-title" href="{% url 'test:home'%}"
+              >+ new repository</a
+            >
+          </div>
+          <div class="urlsdelete">
+            <a> </a>
+          </div>
+        </div>  
+      </div>
+  </body>
+</html>
