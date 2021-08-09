@@ -1,72 +1,148 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 * {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
-    box-sizing: border-box;
     font-family: "Noto Sans KR", sans-serif;
 }
 
-.login_right {
+.header-box {
+    display: inline-block;
+    height: 70px;
+    width:100%;
+    justify-content:left;
+    align-items: left;
+    margin: 0 auto;
+}
+
+.homelogo {
+    width: 10%;
+    background: #2E3E99;
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    padding: 15px;
+}
+
+.login-left{
+    height: 700px;
+    width: 50%;
+    float: left;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 23px 8px 8px 24px;
+    align-items: center;
+}
 
+.login-right{
+    height: 700px;
+    width: 50%;
+    float: right;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position:relative;
+}
+
+.box{
+    position:absolute;
+    top: 25px;
+    left:0;
+}
+
+.button-box{
+    align-items: center;
+    padding-top: 24px;
+
+    width: 60%;
+    height:70%;
+    margin: 0 auto;
     position: relative;
-    width: 30%;
-    height: 600px;
-    left: 850px;
-
+    
     background: #FFFFFF;
     /* 16 dp */
-
+    
     box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.14), 0px 6px 30px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.2);
     border-radius: 30px;
 }
 
-.login_form {
-    position: relative;
-    width: 108%;
-    height: 510px;
-    top: 15px;
-    left: -24px;
+.button-box-2{
+    align-items: center;
+    padding-top: 24px;
 
+    width: 60%;
+    height:70%;
+    margin: 0 auto;
+    position: relative;
+    
     background: #2E3E99;
+    /* 16 dp */
+    
+    box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.14), 0px 6px 30px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.2);
     border-radius: 30px;
 }
-
-/*상단의 signin, signup*/
-h2 {
-    text-align: center;
+.signin-btn{
+    display: inline-block;
     font-style: normal;
     font-weight: normal;
     font-size: 23px;
+    color:#2E3E99;
+    border: 0;
+    cursor: pointer;
+    background: transparent;
+    outline: none;
+    position: relative;
+    margin-left: 30px;
+    margin-right: 40px;
+}
+
+.signup-btn{
     display: inline-block;
-    color: #2E3E99;
-}
-
-h2.signin_button {
-    color: #2E3E99;
-    border-bottom: 5px solid #2E3E99;
-}
-
-.signup_button {
-    float: left;
-    color: #2E3E99;
-    opacity: 70%;
-    text-decoration: none;
-    text-align: center;
     font-style: normal;
     font-weight: normal;
     font-size: 23px;
+    color:#2E3E99;
+    opacity: 50%;
+    border: 0px;
+    padding: 10px;
+    cursor: pointer;
+    background: transparent;
+    outline: none;
+    position: relative;
+}
+
+.signin-btn-2{
     display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    color:White;
+    opacity: 50%;
+    border: 0;
+    cursor: pointer;
+    background: transparent;
+    outline: none;
+    position: relative;
+    margin-left: 30px;
+    margin-right: 40px;
+}
+
+.signup-btn-2{
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    color: white;
+    border: 0px;
+    padding: 10px;
+    cursor: pointer;
+    background: transparent;
+    outline: none;
+    position: relative;
 }
 
 .underlineHover:after {
     display: block;
     left: 0;
-    bottom: -10px;
+    bottom: 0;
     width: 0;
     height: 5px;
     background-color: #2E3E99;
@@ -74,27 +150,61 @@ h2.signin_button {
     transition: width 0.2s;
 }
 
-.underlineHover:hover {
-    color: #2E3E99;
+.underlineHover-2:hover {
+    color: white;
     opacity: 100%;
 }
 
-.underlineHover:hover:after {
+.underlineHover-2:hover:after{
     width: 100%;
 }
 
-/*input*/
-.login_email {
-    margin-top: 80px;
-    margin-left: 60px;
-    width: 70%;
+.underlineHover-2:after {
+    display: block;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 5px;
+    background-color: white;
+    content: "";
+    transition: width 0.2s;
 }
 
-.login_email input {
-    font-family: inherit;
+.underlineHover-2:hover {
+    color: white;
+    opacity: 100%;
+}
+
+.underlineHover:hover:after{
+    width: 100%;
+}
+
+.signin-btn-2:focus{
+    opacity: 100%;
+}
+
+.signup-btn:focus{
+    opacity: 100%;
+}
+
+.input-form{
+    display: inline-block;
+    width: 100%;
+    height: 85%;
+    padding-bottom: 40px;
+    background:#2E3E99;
+    border-radius: 30px;
+    align-items: center;
+}
+
+.input-field{
+    margin-top: 60px;
+    margin-left: 60px;
+    width: 70%;
     border: 0;
     border-bottom: 3px solid #FFFFFF;
     outline: 0;
+    font-weight: lighter;
     font-size: 16px;
     color: #FFFFFF;
     padding: 7px 0;
@@ -102,43 +212,88 @@ h2.signin_button {
     transition: border-color 0.2s;
 }
 
-.login_password {
-    margin-top: 40px;
-    margin-left: 60px;
-    width: 70%;
-}
-
-.login_password input {
-    font-family: inherit;
-    border: 0;
-    border-bottom: 3px solid #FFFFFF;
-    outline: 0;
-    font-size: 16px;
-    color: #FFFFFF;
-    padding: 7px 0;
-    background: transparent;
-    transition: border-color 0.2s;
-}
-
-::placeholder {
+.input-field::placeholder {
     color: #FFFFFF;
     opacity: 70%;
     font-size: 16px;
 }
 
-.submit {
-    margin-top: 40px;
-    margin-left: 60px;
-    width: 100%;
+.login-error{
+    display: flex;
+    align-self: center;
+    color:#FF0000;
+    font-size: 13px;
+    margin-top:20px;
+    margin-left:50px;
+    position: absolute;
+    font-style: lighter;
+    font-weight: lighter;
 }
 
-.login_button input {
-    width: 70%;
-    height: 50px;
+.login-btn{
+    margin-top: 100px;
+    width: 50%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    background: white;
     border: 0;
     outline: none;
     border-radius: 20px;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
     color: #2E3E99;
-    background: #FFFFFF;
+}
+
+.register-btn{
+    margin-top: 60px;
+    width: 50%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    background: #2E3E99;
+    border: 0;
+    outline: none;
+    border-radius: 20px;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: white;
+}
+
+.input-form-2{
+    display: inline-block;
+    width: 100%;
+    height: 85%;
+    padding-bottom: 40px;
+
+    background: white;
+    border-radius: 30px;
+    align-items: center;
+}
+
+.input-field-2{
+    margin-top: 40px;
+    margin-left: 60px;
+    width: 70%;
+    border: 0;
+    border-bottom: 3px solid #2E3E99;
+    outline: 0;
+    font-size: 16px;
+    color: #2E3E99;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.input-field-2::placeholder{
+    color: #2E3E99;
+    opacity: 70%;
     font-size: 16px;
 }
+
+.material-icons-sharp .error { 
+    font-size: 16px; }
