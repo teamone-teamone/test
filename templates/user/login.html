@@ -24,19 +24,12 @@
     <div class="login-left">
     </div>
     
-        <div class="login-right">
-            <div id = "btn" class="button-box">
-                <button id = "login" type="button" class="signin-btn underlineHover" onclick="login()">Sign in</button>
-                <button id = "register" type="button" class="signup-btn underlineHover" onclick="register()">Sign up</button>
-                <form id="signin" class="input-form">
-                    <input type="email" class="input-field" placeholder="Email">
-                    <input type="text" class="input-field" placeholder="Password">
-                    <p class="login-error">
-                        <span class="material-icons-sharp error">error</span>
-                        &ensp;please enter a correct username and password</p>
-                    <button type="submit" class="login-btn">LOGIN</button>
-                </form>
-                <form id="signup" class="input-form-2">
+    <div class="login-right">
+        <div class="box">
+            <div id ="signup" class="button-box-2">
+                <button id = "login" type="button" class="signin-btn-2 underlineHover-2" onclick="login()">Sign in</button>
+                <button id = "register" type="button" class="signup-btn-2 underlineHover-2" onclick="register()">Sign up</button>
+                <form class="input-form-2">
                     <input type="text" class="input-field-2" placeholder="User Name">
                     <input type="email" class="input-field-2" placeholder="Email">
                     <input type="text" class="input-field-2" placeholder="Password">
@@ -44,19 +37,34 @@
                 </form>
             </div>
         </div>
+        <div class="box">
+            <div id ="signin" class="button-box">
+                <button id = "login" type="button" class="signin-btn underlineHover" onclick="login()">Sign in</button>
+                <button id = "register" type="button" class="signup-btn underlineHover" onclick="register()">Sign up</button>
+                <form class="input-form">
+                    <input type="email" class="input-field" placeholder="Email">
+                    <input type="text" class="input-field" placeholder="Password">
+                    <p class="login-error">
+                        <span class="material-icons-sharp error">error</span>
+                        &ensp;please enter a correct username and password</p>
+                    <button type="submit" class="login-btn">LOGIN</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script>
         var x = document.getElementById("signin");
         var y = document.getElementById("signup");
 
         function register(){
-            x.style.left = "-1200px"
-            y.style.left = "0px"
+            x.style.display="none"
+            y.style.display = "block"
         }
 
         function login(){
-            x.style.left = "0px"
-            y.style.left = "1400px"
+            x.style.display = "block"
+            y.style.display = "none"
         }
 
     </script>
