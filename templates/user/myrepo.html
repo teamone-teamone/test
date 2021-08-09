@@ -11,7 +11,13 @@
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
     />
-    <link rel="stylesheet" href="{% static 'css/styles.css'%}" />
+    <link href="https://use.fontawesome.com/releases/v5.0.3/css/all.css" 
+          rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!--<link rel="stylesheet" href="{% static 'css/styles.css'%}" />-->
     <link rel="stylesheet" href="{% static 'css/myrepo.css'%}" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet" />
@@ -51,27 +57,31 @@
         <div class="page-title-box">
           <p class="page-title">MY URL SELVES</p>
         </div>
-        <form class="search">
-          <input
-            class="header-search-input"
-            type="text"
-            name="search"
-            maxlength="500"
-            value=""
-            placeholder="Search UR repo"
-            autocomplete="off"
-          />
-  
-          <button class="img-button" type="submit" name="click" value="">
-            <i class="fas fa-search"></i>
-          </button>
-        </form>
-        {% for repo in repolist %}
-        <br><br><br>
+
+        <div class="search">
+          <form>
+            <input 
+              class="header-search-input"
+              type="text" 
+              name="search" 
+              maxlength="500"
+              value=""
+              placeholder="Search UR repo"
+              autocomplete="off"
+            />
+            <button class="searchrepo-button" type="submit" name="click" value="">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>  
+
+        
+        <br><br>
       </div>
     </div>
-        
-
+     
+      <div class="url-background">
+        {% for repo in repolist %}
         <div class="urls">
           <div class="urlstitle">
             <a
@@ -83,7 +93,7 @@
           </div>
           <div class="urlsdelete">
             <a
-              class="delete-btn white"
+              class="delete-btn"
               href="{% url 'test:deleterepository' repo.pk%}"
             >
               x
@@ -92,6 +102,7 @@
           <br />
         </div>
         {% endfor %}
+
         <div class="urls">
           <div class="urlstitle">
             <a class="my-repo-title" href="{% url 'test:home'%}"
@@ -101,8 +112,7 @@
           <div class="urlsdelete">
             <a> </a>
           </div>
-        </div>
+        </div>  
       </div>
-    </div>
   </body>
 </html>
