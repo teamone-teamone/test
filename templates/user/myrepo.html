@@ -26,30 +26,30 @@
   </head>
 
   <body>
-    <header class="header-box">
+      <header class="header-box">
      <!-- <a class="homelogo" href="{% url 'test:home'%}">URL repo</a> -->
-     
-      <span class="material-icons md-30"> 
-        <a href="javascript:history.back()">
-          arrow_back_ios_new
-        </a>
-      </span>
+        <span class="material-icons md-37"> 
+          <a href="javascript:history.back()">
+            arrow_back_ios_new
+          </a>
+        </span>
       
-      <div class="flexbox-search">
-        <div class="searchrepo">
-          <div>
-            <input type="text" placeholder="Search" required>
+        <div class="flexbox-search">
+          <div class="searchrepo">
+            <div>
+              <input type="text" placeholder="Search" required>
+            </div>
           </div>
         </div>
-      </div>
 
-      <span class="material-icons md-30">
-        <a href="{% url 'user:logout' %}"> <!--class="logout"-->
-          person
-        </a>
-      </span>  
+        <span class="material-icons md-37">
+          <a href="{% url 'user:logout' %}"> 
+            person
+          </a>
+        </span> 
       <!--<a class="logout" href="{% url 'user:logout' %}"><i class="profile-logo fas fa-user-circle"></i>logout</a> -->
-    </header>
+      </header>
+  
     
 
     <div class="my-repo-backgraound">
@@ -57,62 +57,55 @@
         <div class="page-title-box">
           <p class="page-title">MY URL SELVES</p>
         </div>
-
-        <div class="search">
-          <form>
-            <input 
-              class="header-search-input"
-              type="text" 
-              name="search" 
-              maxlength="500"
-              value=""
-              placeholder="Search UR repo"
-              autocomplete="off"
-            />
-            <button class="searchrepo-button" type="submit" name="click" value="">
-              <i class="fas fa-search"></i>
-            </button>
-          </form>
-        </div>  
-
-        
-        <br><br>
       </div>
     </div>
-     
-      <div class="url-background">
-        {% for repo in repolist %}
-        <div class="urls">
-          <div class="urlstitle">
-            <a
-              class="my-repo-title"
-              href="{% url 'test:urlrepository' repo.pk%}"
-            >
-              {{repo.title}}
-            </a>
-          </div>
-          <div class="urlsdelete">
-            <a
-              class="delete-btn"
-              href="{% url 'test:deleterepository' repo.pk%}"
-            >
-              x
-            </a>
-          </div>
-          <br />
+
+      <!--<div class="url-wrap">-->
+        <div class="container-input">
+          <input type="text" class="search-term" placeholder="Search UR repo">
+          <button type="submit" class="search-button" id="selectTheory">
+            <i class="fa fa-search"></i>
+         </button>
         </div>
-        {% endfor %}
+        <br><br>
+     
+    <div class="url-background">
+      <div class="background-top">
+        <div class="background-big-circle">
+          <div class="background-small-circle">
+            <div class="material-icons md-40">
+              <a href="{% url 'test:home' %}">
+                add
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% for repo in repolist %}
 
         <div class="urls">
           <div class="urlstitle">
-            <a class="my-repo-title" href="{% url 'test:home'%}"
-              >+ new repository</a
-            >
+            <div class="url-title-box">
+              <a
+                class="my-repo-title"
+                href="{% url 'test:urlrepository' repo.pk%}"
+              >
+                {{repo.title}}
+              </a>
+              <div class="urlsdelete">
+                <a
+                  class="delete-btn"
+                  href="{% url 'test:deleterepository' repo.pk%}"
+                >
+                  x
+                </a>
+              </div>
+            </div>
           </div>
-          <div class="urlsdelete">
-            <a> </a>
-          </div>
-        </div>  
-      </div>
-  </body>
+        </div>
+      <br />
+      {% endfor %}
+    </div>
+</body>
 </html>
+
