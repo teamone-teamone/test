@@ -7,8 +7,9 @@ from django.contrib.auth import authenticate
 
 # Create your views here.
 
+
 def home(request):
-  return render(request, "repository/repositoryhome.html")
+    return render(request, "repository/repositoryhome.html")
 
 
 def firsturlpaste(request):
@@ -21,22 +22,27 @@ def firsturlpaste(request):
         form = test_forms.NewUrlForm(request.POST)
         if form.is_valid():
             url = form.save(commit=False)
-            newWebmark = test_models.WebMark.objects.create(for_repository=newRepository)
+            newWebmark = test_models.WebMark.objects.create(
+                for_repository=newRepository)
             url.for_webmark = newWebmark
             url.urltitle = url.geturltitle()
             url.save()
-            return redirect(reverse("test:urlrepository", kwargs={"pk": newRepository.pk}))
+            return redirect(
+                reverse("test:urlrepository", kwargs={"pk": newRepository.pk}))
     return redirect(
-        reverse("test:urlrepository", kwargs={"pk": newRepository.pk})
-    )
+        reverse("test:urlrepository", kwargs={"pk": newRepository.pk}))
 
 
-
-def urlrepository(request, pk):
+def urlrepository(request, pk, html_id='html'):
     repository = get_object_or_404(test_models.Repository, pk=pk)
 
     return render(
-        request, "repository/urlrepository.html", {"repository": repository},
+        request,
+        "repository/urlrepository.html",
+        {
+            "repository": repository,
+            "html_id": html_id
+        },
     )
 
 
@@ -62,8 +68,7 @@ def addUrl(request, pk_repo, pk_web):
             url.urltitle = url.geturltitle()
             url.save()
             return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo})
-            )
+                reverse("test:urlrepository", kwargs={"pk": pk_repo}))
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
 
 
@@ -76,8 +81,11 @@ def changeWebmarkTitle(request, pk_repo, pk_web):
             web.title = title
             web.save()
             return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo})
-            )
+                reverse("test:urlrepository",
+                        kwargs={
+                            "pk": pk_repo,
+                            "html_id": 'webmark_{}'.format(web.id)
+                        }))
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
 
 
@@ -102,8 +110,11 @@ def changeurltitle(request, pk_repo, pk_url):
             url.urltitle = urltitle
             url.save()
             return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo})
-            )
+                reverse("test:urlrepository",
+                        kwargs={
+                            "pk": pk_repo,
+                            "html_id": "urltitle_{}".format(url.pk)
+                        }))
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
 
 
@@ -128,7 +139,9 @@ def changedescription(request, pk_repo, pk_url):
             url.description = description
             url.save()
             return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo})
-            )
+                reverse("test:urlrepository",
+                        kwargs={
+                            "pk": pk_repo,
+                            "html_id": "description_{}".format(url.pk)
+                        }))
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
-

@@ -17,10 +17,10 @@ from mechanize import Browser
 class Repository(core_models.TimeStampedModel):
     isopen_CHOICES = (("yes", "yes"), ("no", "no"))
     # objects = models.Manager()
-    title = models.CharField(max_length=50, default="New Repo title")
-    isopen = models.CharField(
-        max_length=10, choices=isopen_CHOICES, default="yes"
-    )
+    title = models.CharField(max_length=50, default="", null=True)
+    isopen = models.CharField(max_length=10,
+                              choices=isopen_CHOICES,
+                              default="yes")
     likenum = models.IntegerField(default=0)
     for_user = models.ForeignKey(
         user_models.User,
@@ -37,23 +37,26 @@ class WebMark(core_models.TimeStampedModel):
         on_delete=models.CASCADE,
         null=False,
     )
-    title = models.CharField(max_length=50, default="New WebMark Title")
+    title = models.CharField(max_length=50, default="", null=True)
 
 
 class Url(core_models.TimeStampedModel):
-    for_webmark = models.ForeignKey(
-        "WebMark", related_name="url", on_delete=models.CASCADE
-    )
-    urltitle = models.CharField(max_length=100, default="")
-    urladdress = models.CharField(max_length=300, default="")
-    description = models.CharField(max_length=500, default="")
+    for_webmark = models.ForeignKey("WebMark",
+                                    related_name="url",
+                                    on_delete=models.CASCADE)
+    urltitle = models.CharField(max_length=100, default="", null=True)
+    urladdress = models.CharField(max_length=300, default="", null=True)
+    description = models.CharField(max_length=1000, default="", null=True)
 
     def geturltitle(self):
         try:
             br = Browser()
             br.set_handle_equiv(False)
             br.set_handle_robots(False)
-            br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36')]
+            br.addheaders = [(
+                'User-agent',
+                'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36'
+            )]
             br.open(self.urladdress)
             title = br.title()
         except Exception as e:

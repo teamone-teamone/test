@@ -1,71 +1,73 @@
 {% load i18n %} {% load static %}
 <!DOCTYPE html>
-<html
-  lang="en"
-  class="{%block backgraound_color%} {%endblock backgraound_color %}"
->
+<html lang="en" class="{%block backgraound_color%} {%endblock backgraound_color %}">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
-    />
-    <link rel="stylesheet" href="{% static 'css/styles.css'%}" />
-    <title>{{repository.title}} | URL repo</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <link rel="stylesheet" href="{% static 'css/repository.css'%}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="{% static 'js/bpop.js' %}"></script>
+    <title>URL repo</title>
   </head>
 
   <body>
+    <div id="bpopup1" class="search-popup-div">
+
+      <div class="search-popup-title-div">
+        <span class="search-popup-title">
+          Search with <br> Repo Title
+        </span>
+      </div>
+      <div class="search-popup-search-div">
+        <div class="search-popup-search-box">
+          <input type="text" class="no-input-box search-popup-search-input" placeholder="search repo title">
+          <span class="material-icons-sharp md-32">
+            search
+          </span>
+        </div>
+      </div>
+      <div class="search-popup-line">
+      </div>
+    </div>
     <header class="header-box">
-      <a class="homelogo" href="{% url 'test:home'%}"
-        >URL repo</a
-      >
 
-      <form class="search">
-        <input
-          class="header-search-input"
-          type="text"
-          name="search"
-          maxlength="500"
-          value=""
-          autocomplete="off"
-        />
+      <a class="homelogo" href="{% url 'test:home'%}">URL repo</a>
 
-        <button class="img-button" type="submit" name="click" value="">
-          <i class="fas fa-search"></i>
-        </button>
-      </form>
-
-      {% if user.is_authenticated %}
-      <a href="{% url 'user:myrepo' %}"
-        ><i class="profile-logo fas fa-user-circle"></i
-      ></a>
-      {% else %}
-      <a class="login" href="{% url 'user:login' %}"
-        ><i class="profile-logo fas fa-user-circle"></i
-      ></a>
-      {% endif %}
+      <div class="header-icons">
+        <span id="search_repo" class="material-icons-sharp md-32 search-repo-btn">
+          search
+        </span>
+        {% if user.is_authenticated %}
+        <a href="{% url 'user:myrepo' %}"><span class="material-icons-sharp md-58">
+            person
+          </span></a>
+        {% else %}
+        <a class="login" href="{% url 'user:login' %}"><span class="material-icons-sharp md-58">
+            person
+          </span></a>
+        {% endif %}
+      </div>
     </header>
-
-    <form
-      class="url-input-form"
-      method="POST"
-      action="{% url 'test:firsturlpaste' %}"
-      enctype="multipart/form-data"
-    >
-      {% csrf_token %}
-      <input
-        class="no-input-box url-input"
-        type="text"
-        name="urladdress"
-        maxlength="300"
-        required=""
-        id="id_urladdress"
-        placeholder="Enter URL"
-      />
-    </form>
-    <br />
     {% comment %} url 입력 밑 저장소 내용 {% endcomment %}
-    
+    <main>
+      <div class="empty-content-div">
+        <form class="url-input-form" method="POST" action="{% url 'test:firsturlpaste'%}" enctype="multipart/form-data">
+          {% csrf_token %}
+
+
+          <input class="no-input-box url-input" type="text" name="urladdress" maxlength="300" required=""
+            id="id_urladdress" placeholder="Copy + Paste URL" />
+          <div class="cursor-div">
+            <span class="cursor"></span>
+          </div>
+        </form>
+      </div>
+    </main>
+
   </body>
+  <script defer src="{% static 'js/repository.js' %}"></script>
+
 </html>
