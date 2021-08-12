@@ -16,21 +16,51 @@
 
   <body>
     <div id="bpopup1" class="search-popup-div">
+      <div class="search-popup-top-div">
 
-      <div class="search-popup-title-div">
-        <span class="search-popup-title">
-          Search with <br> Repo Title
-        </span>
-      </div>
-      <div class="search-popup-search-div">
-        <div class="search-popup-search-box">
-          <input type="text" class="no-input-box search-popup-search-input" placeholder="search repo title">
-          <span class="material-icons-sharp md-32">
-            search
+        <div class="search-popup-title-div">
+          <span class="search-popup-title">
+            Search with <br> Repo Title
           </span>
+          <div onclick="closePopup();" class="search-popup-exit-div pointer">
+            <span class="material-icons-sharp md-40 white"> close
+            </span>
+          </div>
+        </div>
+        <div class="search-popup-search-div">
+          <form id="search_popup" class="search-popup-search-form" action="{% url 'test:urlrepository' repository.pk %}"
+            method="GET">
+
+            <input type="text" class="no-input-box search-popup-search-input" placeholder="search repo title"
+              name="title" {% if search %} value={{search}} {% endif %}>
+
+            <button class="material-icons-sharp md-32">
+              search
+            </button>
+          </form>
         </div>
       </div>
       <div class="search-popup-line">
+      </div>
+      <div class="search-popup-list-div">
+        <ul class="search-popup-list-ul">
+          {% for repo in repolist %}
+          <a href="{% url 'test:seerepository' repo.pk %}">
+            <li class="search-popup-list-li">
+              <div class="search-popup-list-title-div">
+                <span class="search-popup-list-span">{{repo.title}}</span>
+              </div>
+              <div class="search-popup-list-icon-div">
+                <span class="material-icons-sharp md-40 white">
+                  chevron_right
+                </span>
+              </div>
+            </li>
+          </a>
+          {% endfor %}
+
+        </ul>
+
       </div>
     </div>
 
@@ -70,86 +100,167 @@
 
         {% comment %} 각각의 web mark {% endcomment %}
         <div class="webmark-container">
-          {% for webmark in repository.webmark.all %}
-          <div class="webmark-box">
-            <div class="webmark-title-box">
-              <form method="POST" id="webmark_{{webmark.id}}"
-                action="{% url 'test:changeWebmarkTitle' repository.pk webmark.pk%}" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input class="no-input-box webmark-title" type="text" name="title" maxlength="15" required=""
-                  {% if webmark.title %} value="{{webmark.title}}" {% endif %} id="id_title" placeholder="Title" />
-              </form>
-              <a class=" delete-btn" href="{% url 'test:deleteWebmark' repository.pk webmark.pk %}">
-                <span class="material-icons-sharp">
-                  close
-                </span></a>
-            </div>
-            {% for url in webmark.url.all %}
-            <div class="url-div">
-              <div class="url-main-div">
 
-                <div class="link-icon-div">
-                  <a class="url-link" href="{{url.urladdress}}" target="_blank">
-                    <span class="material-icons-sharp md-30">
-                      insert_link
-                    </span></a>
-                </div>
-                <form id="urltitle_{{url.pk}}" class="url-input-div" method="POST"
-                  action="{% url 'test:changeurltitle' repository.pk url.pk%}" enctype="multipart/form-data">
-                  {% csrf_token %}
-                  <input class="no-input-box url-title-input" type="text" name="urltitle" maxlength="100" required=""
-                    value="{{url.urltitle}}" id="id_urltitle" />
-                </form>
-                <div class="icon-div">
-                  <span class="url-arrow " onclick="toggle_description({{url.pk}})">
-                    <span class="material-icons-sharp md-45">
-                      arrow_drop_down
-                    </span></span>
-                </div>
-                <div class="icon-div">
-                  <a class="url-delete" href="{% url 'test:deleteUrl' repository.pk url.pk %}">
-                    <span class="material-icons-sharp md-35">
-                      delete_outline
-                    </span></a>
-                </div>
-              </div>
-
-              <div class="descrip-box" id="{{url.pk}}">
-                <div class="null-div"></div>
-                <form id="description_{{url.pk}}" class="descrip-form" method="POST"
-                  action="{% url 'test:changedescription' repository.pk url.pk%}" enctype="multipart/form-data">
-                  {% csrf_token %}
-                  <textarea class="no-input-box descrip" type="text" name="description" maxlength="990"
-                    onkeydown="resize(this)" id="id_description"
-                    placeholder="Description">{{url.description}}</textarea>
-
-                </form>
-                <div class="null-div"></div>
-
-              </div>
-            </div>
-            {% endfor %}
-            <div class="addurl-div">
-              <div class="plus-icon-div">
-                <span class="material-icons-sharp md-35 plus-icon">add</span>
-
-                <form class="addurl-form" method="POST" action="{% url 'test:addUrl' repository.pk webmark.pk%}"
+          <div class="webmark-section">
+            {% widthratio repository.webmark.all|length 2 1 as half %}
+            {% for webmark in repository.webmark.all %}
+            {% if forloop.counter0|floatformat:"0" < half %}
+            <div class="webmark-box " id="webmark_{{webmark.id}}">
+              <div class="webmark-title-box">
+                <form method="POST" action="{% url 'test:changeWebmarkTitle' repository.pk webmark.pk%}"
                   enctype="multipart/form-data">
                   {% csrf_token %}
-                  <input class="no-input-box add-url" type="text" name="urladdress" maxlength="300" required=""
-                    id="id_urladdress" placeholder="Add url" />
+                  <input class="no-input-box webmark-title" type="text" name="title" maxlength="15" required=""
+                    {% if webmark.title %} value="{{webmark.title}}" {% endif %} id="id_title" placeholder="Title" />
                 </form>
+                <a class=" delete-btn" href="{% url 'test:deleteWebmark' repository.pk webmark.pk %}">
+                  <span class="material-icons-sharp">
+                    close
+                  </span></a>
+              </div>
+              {% for url in webmark.url.all %}
+              <div id="urltitle_{{url.pk}}" class="url-div">
+                <div class="url-main-div">
+
+                  <div class="link-icon-div">
+                    <a class="url-link" href="{{url.urladdress}}" target="_blank">
+                      <span class="material-icons-sharp md-30">
+                        insert_link
+                      </span></a>
+                  </div>
+                  <form class="url-input-div" method="POST" action="{% url 'test:changeurltitle' repository.pk url.pk%}"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input class="no-input-box url-title-input" type="text" name="urltitle" maxlength="100" required=""
+                      value="{{url.urltitle}}" id="id_urltitle" />
+                  </form>
+                  <div class="icon-div">
+                    <span class="url-arrow " onclick="toggle_description({{url.pk}})">
+                      <span class="material-icons-sharp md-45">
+                        arrow_drop_down
+                      </span></span>
+                  </div>
+                  <div class="icon-div">
+                    <a class="url-delete" href="{% url 'test:deleteUrl' repository.pk url.pk %}">
+                      <span class="material-icons-sharp md-35">
+                        delete_outline
+                      </span></a>
+                  </div>
+                </div>
+
+                <div class="descrip-box" id="{{url.pk}}">
+                  <div class="null-div"></div>
+                  <form id="description_{{url.pk}}" class="descrip-form" method="POST"
+                    action="{% url 'test:changedescription' repository.pk url.pk%}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <textarea class="no-input-box descrip" type="text" name="description" maxlength="990"
+                      id="id_description" placeholder="Description">{{url.description}}</textarea>
+
+                  </form>
+                  <div class="null-div"></div>
+
+                </div>
+              </div>
+              {% endfor %}
+              <div class="addurl-div">
+                <div class="plus-icon-div">
+                  <span class="material-icons-sharp md-35 plus-icon">add</span>
+
+                  <form class="addurl-form" method="POST" action="{% url 'test:addUrl' repository.pk webmark.pk%}"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input class="no-input-box add-url" type="text" name="urladdress" maxlength="300" required=""
+                      id="id_urladdress" placeholder="Add url" />
+                  </form>
+                </div>
               </div>
             </div>
+            {% endif %}
+            {% endfor %}
           </div>
-          {% endfor %}
+          <div class="webmark-section">
+            {% for webmark in repository.webmark.all %}
+            {% if forloop.counter0|floatformat:"0" >= half %}
+            <div class="webmark-box " id="webmark_{{webmark.id}}">
+              <div class="webmark-title-box">
+                <form method="POST" action="{% url 'test:changeWebmarkTitle' repository.pk webmark.pk%}"
+                  enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input class="no-input-box webmark-title" type="text" name="title" maxlength="15" required=""
+                    {% if webmark.title %} value="{{webmark.title}}" {% endif %} id="id_title" placeholder="Title" />
+                </form>
+                <a class=" delete-btn" href="{% url 'test:deleteWebmark' repository.pk webmark.pk %}">
+                  <span class="material-icons-sharp">
+                    close
+                  </span></a>
+              </div>
+              {% for url in webmark.url.all %}
+              <div id="urltitle_{{url.pk}}" class="url-div">
+                <div class="url-main-div">
+
+                  <div class="link-icon-div">
+                    <a class="url-link" href="{{url.urladdress}}" target="_blank">
+                      <span class="material-icons-sharp md-30">
+                        insert_link
+                      </span></a>
+                  </div>
+                  <form class="url-input-div" method="POST" action="{% url 'test:changeurltitle' repository.pk url.pk%}"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input class="no-input-box url-title-input" type="text" name="urltitle" maxlength="100" required=""
+                      value="{{url.urltitle}}" id="id_urltitle" />
+                  </form>
+                  <div class="icon-div">
+                    <span class="url-arrow " onclick="toggle_description({{url.pk}})">
+                      <span class="material-icons-sharp md-45">
+                        arrow_drop_down
+                      </span></span>
+                  </div>
+                  <div class="icon-div">
+                    <a class="url-delete" href="{% url 'test:deleteUrl' repository.pk url.pk %}">
+                      <span class="material-icons-sharp md-35">
+                        delete_outline
+                      </span></a>
+                  </div>
+                </div>
+
+                <div class="descrip-box" id="{{url.pk}}">
+                  <div class="null-div"></div>
+                  <form id="description_{{url.pk}}" class="descrip-form" method="POST"
+                    action="{% url 'test:changedescription' repository.pk url.pk%}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <textarea class="no-input-box descrip" type="text" name="description" maxlength="990"
+                      id="id_description" placeholder="Description">{{url.description}}</textarea>
+
+                  </form>
+                  <div class="null-div"></div>
+
+                </div>
+              </div>
+              {% endfor %}
+              <div class="addurl-div">
+                <div class="plus-icon-div">
+                  <span class="material-icons-sharp md-35 plus-icon">add</span>
+
+                  <form class="addurl-form" method="POST" action="{% url 'test:addUrl' repository.pk webmark.pk%}"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input class="no-input-box add-url" type="text" name="urladdress" maxlength="300" required=""
+                      id="id_urladdress" placeholder="Add url" />
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <a href="{% url 'test:newWebmark' repository.pk %}">
+              <div class="webmark-box add-webmark-div">
+                <span class="material-icons-sharp md-45 ">
+                  add
+                </span></div>
+            </a>
+          </div>
         </div>
-        <a href="{% url 'test:newWebmark' repository.pk %}">
-          <div class="webmark-box add-webmark-div">
-            <span class="material-icons-sharp md-45 ">
-              add
-            </span></div>
-        </a>
 
 
 
@@ -157,21 +268,35 @@
     </main>
 
   </body>
-  <script>
-    const gotoElement = document.getElementById("{{html_id}}")
-    if (gotoElement !== null) {
-
-      gotoElement.scrollIntoView(true);
+  <script defer src="{% static 'js/repository.js' %}"></script>
+  <script defer>
+    if ('{{html_id}}' !== '') {
+      $(document).ready(function () {
+        $('html, body').animate({
+          scrollTop: $('#{{html_id}}').offset().top - 250
+        }, 0);
+      });
     }
+
 
     $('.plus-icon-div').on('click', function () {
       $(this).css('width', '60%');
       $(this).children('form').css('width', '100%');
     })
 
+    function adjustHeight(arg) {
+      let textEle = $(arg);
+      textEle.css('height', 'auto');
+      let textEleHeight = textEle.prop('scrollHeight');
+      textEle.css('height', textEleHeight);
+    };
     $("textarea").on('keydown keyup focus', function () {
-      $(this).height(1).height($(this).prop('scrollHeight') + 12);
+      adjustHeight(this);
     });
+
+
+
+
 
     const toggle_description = (pk) => {
       $(`#description_${pk}`).slideToggle(300);
@@ -183,12 +308,29 @@
     if ('{{html_id}}'.includes('description')) {
       $(`#{{html_id}}`).show()
     }
+
     document.querySelectorAll("form").forEach((element) => {
       element.addEventListener("focusout", (e) => {
-        e.path[1].submit();
+        if (e.path[1].id !== "search_popup")
+
+          e.path[1].submit();
       });
     });
+
+
+
+    if (`{{search}}` !== '')
+      (function ($) {
+        $(function () {
+          $("#bpopup1").bPopup({
+            speed: 0,
+          });
+        });
+      })(jQuery);
+
+    const closePopup = () => {
+      $("#bpopup1").bPopup().close();
+    }
   </script>
-  <script defer src="{% static 'js/repository.js' %}"></script>
 
 </html>

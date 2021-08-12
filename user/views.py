@@ -22,7 +22,6 @@ def loginSignUP(request):
     login_error = ""
     signup_error = ""
     isLogin = True
-    print(request.POST)
     if request.method == "POST":
         if request.POST.get("nickname"):
             isLogin = False

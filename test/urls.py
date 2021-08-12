@@ -8,6 +8,7 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("firsturlpaste/", views.firsturlpaste, name="firsturlpaste"),
     path("newWebmark/<int:pk>/", views.newWebmark, name="newWebmark"),
+    path("seerepository/<int:pk>", views.seerepository, name="seerepository"),
     path("urlrepository/<int:pk>", views.urlrepository, name="urlrepository"),
     path("urlrepository/<int:pk>/<str:html_id>",
          views.urlrepository,

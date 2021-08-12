@@ -40,4 +40,3 @@ class ChangeRepositoryTitleForm(forms.ModelForm):
         fields = [
             "title",
         ]
-

@@ -9,6 +9,26 @@
 a {
   text-decoration: none;
 }
+button {
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+}
+ul {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+.white {
+  color: #ffffff;
+}
 .header-box {
   display: flex;
   justify-content: space-between;
@@ -135,6 +155,7 @@ main {
   font-size: 47px;
   font-weight: bold;
   border-radius: 10px;
+  text-overflow: ellipsis;
 }
 
 .repo-title::placeholder {
@@ -142,16 +163,26 @@ main {
 }
 
 .webmark-container {
+  display: flex;
+}
+.webmark-section {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 
 .webmark-box {
   box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.14),
     0px 6px 30px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.2);
-  width: 48%;
-  margin: 1%;
+  width: 96%;
+  margin: 2%;
   float: left;
   border-bottom: 13px transparent solid;
   transition: all 0.5s;
+}
+
+.float-right {
+  float: right;
 }
 .webmark-box:hover {
   border-bottom: 13px #2e3e99 solid;
@@ -284,7 +315,10 @@ main {
 
   width: 100%;
   resize: none;
+  overflow: hidden;
+  transition: all 0.5s;
 }
+
 textarea {
   overflow: visible;
 }
@@ -348,18 +382,6 @@ textarea {
 .plus-icon {
   color: rgba(255, 255, 255, 0.7);
 }
-@media (max-width: 1024px) {
-  .webmark-box {
-    box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.14),
-      0px 6px 30px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.2);
-    width: 98%;
-    margin: 1%;
-    float: left;
-  }
-  .main-div {
-    width: 98%;
-  }
-}
 
 .search-popup-div {
   display: none;
@@ -368,9 +390,23 @@ textarea {
   height: 650px;
   background: #2e3e99;
   border-radius: 30px;
-  padding: 50px;
+  padding-bottom: 30px;
+  padding-top: 30px;
 }
-
+.search-popup-top-div {
+  padding-left: 50px;
+  padding-right: 30px;
+}
+.search-popup-title-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.search-popup-exit-div {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 .search-popup-title {
   font-style: normal;
   font-weight: bold;
@@ -382,14 +418,14 @@ textarea {
 .search-popup-search-div {
   margin-top: 20px;
   padding: 20px;
-
+  padding-right: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.search-popup-search-box {
+.search-popup-search-form {
   padding: 20px;
-  padding-left: 30px;
+  padding-left: 0px;
   background: #ffffff;
   border-radius: 50px;
   width: 100%;
@@ -399,6 +435,7 @@ textarea {
   align-items: center;
 }
 .search-popup-search-input {
+  padding-left: 30px;
   width: 80%;
   height: 70px;
 
@@ -413,4 +450,95 @@ textarea {
 .material-icons-sharp.md-32 {
   font-size: 40px;
   color: #2e3e99;
+}
+
+.search-popup-list-div {
+  margin-top: 15px;
+  padding-top: 15px;
+  padding-left: 35px;
+  margin-right: 20px;
+  display: flex;
+  overflow: auto;
+  height: 300px;
+}
+
+.search-popup-list-div::-webkit-scrollbar {
+  width: 16px;
+}
+.search-popup-list-div::-webkit-scrollbar-thumb {
+  background-color: #fcfcfc;
+  border-radius: 10px;
+  background-clip: padding-box;
+}
+.search-popup-list-div::-webkit-scrollbar-track {
+  background-color: rgb(255, 255, 255);
+
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  background-clip: padding-box;
+}
+.search-popup-list-div::-webkit-scrollbar-button {
+  display: none;
+}
+
+.search-popup-list-ul {
+  width: 95%;
+}
+
+.search-popup-list-li {
+  height: 70px;
+  width: 100%;
+  padding-left: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+.search-popup-list-li::marker {
+  unicode-bidi: none;
+  display: none;
+}
+
+.search-popup-list-title-div {
+  width: 90%;
+  overflow: hidden;
+}
+.search-popup-list-span {
+  font-size: 23px;
+  line-height: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* identical to box height, or 87% */
+  letter-spacing: 0.25px;
+  color: #ffffff;
+}
+@media (max-width: 1024px) {
+  .webmark-container {
+    flex-direction: column;
+  }
+  .webmark-section {
+    width: 100%;
+  }
+  .main-div {
+    width: 98%;
+  }
+}
+@media (max-width: 700px) {
+  .search-popup-div {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .search-popup-title {
+    font-size: 35px;
+  }
+  .search-popup-top-div {
+    padding-left: 20px;
+    padding-right: 10px;
+  }
+  .webmark-title {
+    width: 100%;
+  }
 }

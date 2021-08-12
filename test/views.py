@@ -33,15 +33,39 @@ def firsturlpaste(request):
         reverse("test:urlrepository", kwargs={"pk": newRepository.pk}))
 
 
-def urlrepository(request, pk, html_id='html'):
+def urlrepository(request, pk, html_id=''):
     repository = get_object_or_404(test_models.Repository, pk=pk)
-
+    repolist = []
+    search = request.GET.get('title', '')
+    if search:
+        repolist = test_models.Repository.objects.filter(
+            title__icontains=search)
     return render(
         request,
         "repository/urlrepository.html",
         {
             "repository": repository,
-            "html_id": html_id
+            "html_id": html_id,
+            "repolist": repolist if repolist else [],
+            "search": search
+        },
+    )
+
+
+def seerepository(request, pk):
+    repository = get_object_or_404(test_models.Repository, pk=pk)
+    repolist = []
+    search = request.GET.get('title', '')
+    if search:
+        repolist = test_models.Repository.objects.filter(
+            title__icontains=search)
+    return render(
+        request,
+        "repository/seerepository.html",
+        {
+            "repository": repository,
+            "repolist": repolist if repolist else [],
+            "search": search
         },
     )
 
@@ -68,7 +92,11 @@ def addUrl(request, pk_repo, pk_web):
             url.urltitle = url.geturltitle()
             url.save()
             return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo}))
+                reverse("test:urlrepository",
+                        kwargs={
+                            "pk": pk_repo,
+                            "html_id": 'webmark_{}'.format(web.id)
+                        }))
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
 
 
