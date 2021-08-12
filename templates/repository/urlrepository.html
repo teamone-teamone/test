@@ -103,8 +103,10 @@
 
           <div class="webmark-section">
             {% widthratio repository.webmark.all|length 2 1 as half %}
+
             {% for webmark in repository.webmark.all %}
-            {% if forloop.counter0|floatformat:"0" < half %}
+
+            {% if forloop.counter0|floatformat:"0" >= half %}
             <div class="webmark-box " id="webmark_{{webmark.id}}">
               <div class="webmark-title-box">
                 <form method="POST" action="{% url 'test:changeWebmarkTitle' repository.pk webmark.pk%}"
@@ -179,8 +181,14 @@
             {% endfor %}
           </div>
           <div class="webmark-section">
+            <a href="{% url 'test:newWebmark' repository.pk %}">
+              <div class="webmark-box add-webmark-div">
+                <span class="material-icons-sharp md-45 ">
+                  add
+                </span></div>
+            </a>
             {% for webmark in repository.webmark.all %}
-            {% if forloop.counter0|floatformat:"0" >= half %}
+            {% if forloop.counter0|floatformat:"0" <  half %}
             <div class="webmark-box " id="webmark_{{webmark.id}}">
               <div class="webmark-title-box">
                 <form method="POST" action="{% url 'test:changeWebmarkTitle' repository.pk webmark.pk%}"
@@ -253,12 +261,7 @@
             </div>
             {% endif %}
             {% endfor %}
-            <a href="{% url 'test:newWebmark' repository.pk %}">
-              <div class="webmark-box add-webmark-div">
-                <span class="material-icons-sharp md-45 ">
-                  add
-                </span></div>
-            </a>
+
           </div>
         </div>
 
