@@ -77,25 +77,35 @@ blockquote input {
 }
 .no-input-box:focus {
   outline: none;
-  box-shadow: 10px 5px 5px gray;
   transition: all 0.5s;
 }
+@keyframes cursor {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+span:after {
+  content: "";
+  animation: cursor.7s infinite;
+}
+
 .url-input {
+  color: rgba(46, 62, 153, 1);
   font-size: larger;
-  background-color: #2e3e990e;
-  text-align: center;
-  width: 500px;
-  border-radius: 30px;
+  width: 491px;
+  height: 24px;
   padding: 20px;
-  box-shadow: -10px 5px 5px gray;
   margin-left: auto;
   margin-right: auto;
 }
 .url-input::placeholder {
-  color: #7f7f7f;
+  color: rgba(46, 62, 153, 0.7);
+  text-align: center;
   font-weight: 500;
 }
-
 .url-input-form {
   display: flex;
 }
@@ -104,13 +114,15 @@ blockquote input {
 }
 .repo-title {
   width: 100%;
-  font-size: 34px;
+  color: rgba(46, 62, 153, 1);
+  font-size: 47px;
   font-weight: bold;
   border-radius: 10px;
-  background: linear-gradient(to right, #2e3e99, #b87a7a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
+.repo-title::placeholder {
+  color: rgba(46, 62, 153, 0.7);
+}
+
 .repo-title:focus {
   box-shadow: none;
 }
@@ -126,9 +138,9 @@ blockquote input {
   flex-wrap: wrap;
 }
 .webmark-box {
-  box-shadow: 10px 5px 5px gray;
+  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.14),
+    0px 6px 30px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.2);
   width: 48%;
-  border-radius: 10px;
   margin: 1%;
 }
 
@@ -139,7 +151,8 @@ blockquote input {
   color: white;
   text-align: center;
   width: auto;
-  border-radius: 30px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
   padding: 10px;
 }
 
@@ -173,6 +186,12 @@ blockquote input {
 .url-div {
   display: flex;
 }
+
+.material-icons-sharp.md-30 {
+  font-size: 30px;
+  color: #2e3e99;
+}
+
 .url-title {
   text-decoration: none;
   color: #2e3e99;
@@ -209,7 +228,6 @@ blockquote input {
   width: auto;
   border-radius: 30px;
   padding: 10px;
-
   font-size: large;
 }
 
@@ -305,7 +323,7 @@ blockquote input {
 button.img-button {
   border: none;
   background: transparent;
-  font-size: 30px;
+  font-size: 50px;
   font-weight: 100;
   margin: 15px;
   margin-left: 0px;
@@ -314,12 +332,14 @@ button.img-button {
   color: #78bfe7;
 }
 
-.profile-logo {
+.material-icons-sharp.md-50 {
   font-size: 50px;
-  background: linear-gradient(to right, #2e3e99, #78bfe7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-right: 15px;
+  color: #2e3e99;
+}
+
+.material-icons-sharp.md-58 {
+  font-size: 58px;
+  color: #2e3e99;
 }
 
 .logout {

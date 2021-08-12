@@ -14,7 +14,7 @@ class ChangeDescription(forms.ModelForm):
     class Meta:
         model = test_models.Url
         fields = [
-            "description1",
+            "description",
         ]
 
 
@@ -40,4 +40,3 @@ class ChangeRepositoryTitleForm(forms.ModelForm):
         fields = [
             "title",
         ]
-

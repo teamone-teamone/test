@@ -9,21 +9,64 @@ from django.contrib.auth import authenticate
 
 
 def home(request):
+    return render(request, "repository/repositoryhome.html")
 
+
+def firsturlpaste(request):
     newRepository = test_models.Repository.objects.create()
     if request.user.is_authenticated:
         newRepository.for_user = request.user
         newRepository.save()
+
+    if request.method == "POST":
+        form = test_forms.NewUrlForm(request.POST)
+        if form.is_valid():
+            url = form.save(commit=False)
+            newWebmark = test_models.WebMark.objects.create(
+                for_repository=newRepository)
+            url.for_webmark = newWebmark
+            url.urltitle = url.geturltitle()
+            url.save()
+            return redirect(
+                reverse("test:urlrepository", kwargs={"pk": newRepository.pk}))
     return redirect(
-        reverse("test:urlrepository", kwargs={"pk": newRepository.pk})
+        reverse("test:urlrepository", kwargs={"pk": newRepository.pk}))
+
+
+def urlrepository(request, pk, html_id=''):
+    repository = get_object_or_404(test_models.Repository, pk=pk)
+    repolist = []
+    search = request.GET.get('title', '')
+    if search:
+        repolist = test_models.Repository.objects.filter(
+            title__icontains=search)
+    return render(
+        request,
+        "repository/urlrepository.html",
+        {
+            "repository": repository,
+            "html_id": html_id,
+            "repolist": repolist if repolist else [],
+            "search": search
+        },
     )
 
 
-def urlrepository(request, pk):
+def seerepository(request, pk):
     repository = get_object_or_404(test_models.Repository, pk=pk)
-
+    repolist = []
+    search = request.GET.get('title', '')
+    if search:
+        repolist = test_models.Repository.objects.filter(
+            title__icontains=search)
     return render(
-        request, "repository/urlrepository.html", {"repository": repository},
+        request,
+        "repository/seerepository.html",
+        {
+            "repository": repository,
+            "repolist": repolist if repolist else [],
+            "search": search
+        },
     )
 
 
@@ -33,17 +76,9 @@ def deleterepository(request, pk):
     return redirect(reverse("user:myrepo"))
 
 
-def newUrl(request, pk):
+def newWebmark(request, pk):
     repo = get_object_or_404(test_models.Repository, pk=pk)
-    if request.method == "POST":
-        form = test_forms.NewUrlForm(request.POST)
-        if form.is_valid():
-            url = form.save(commit=False)
-            newWebmark = test_models.WebMark.objects.create(for_repository=repo)
-            url.for_webmark = newWebmark
-            url.urltitle = url.geturltitle()
-            url.save()
-            return redirect(reverse("test:urlrepository", kwargs={"pk": pk}))
+    test_models.WebMark.objects.create(for_repository=repo)
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk}))
 
 
@@ -57,8 +92,11 @@ def addUrl(request, pk_repo, pk_web):
             url.urltitle = url.geturltitle()
             url.save()
             return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo})
-            )
+                reverse("test:urlrepository",
+                        kwargs={
+                            "pk": pk_repo,
+                            "html_id": 'webmark_{}'.format(web.id)
+                        }))
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
 
 
@@ -71,8 +109,11 @@ def changeWebmarkTitle(request, pk_repo, pk_web):
             web.title = title
             web.save()
             return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo})
-            )
+                reverse("test:urlrepository",
+                        kwargs={
+                            "pk": pk_repo,
+                            "html_id": 'webmark_{}'.format(web.id)
+                        }))
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
 
 
@@ -97,8 +138,11 @@ def changeurltitle(request, pk_repo, pk_url):
             url.urltitle = urltitle
             url.save()
             return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo})
-            )
+                reverse("test:urlrepository",
+                        kwargs={
+                            "pk": pk_repo,
+                            "html_id": "urltitle_{}".format(url.pk)
+                        }))
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
 
 
@@ -114,46 +158,18 @@ def changeRepositoryTitle(request, pk):
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk}))
 
 
-def changedescription1(request, pk_repo, pk_url):
+def changedescription(request, pk_repo, pk_url):
     url = get_object_or_404(test_models.Url, pk=pk_url)
     if request.method == "POST":
         form = test_forms.ChangeDescription(request.POST)
         if form.is_valid():
-            description1 = form.cleaned_data.get("description1")
-            description1 = description1.replace("#", "")
-            url.description1 = description1
+            description = form.cleaned_data.get("description")
+            url.description = description
             url.save()
             return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo})
-            )
-    return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
-
-
-def changedescription2(request, pk_repo, pk_url):
-    url = get_object_or_404(test_models.Url, pk=pk_url)
-    if request.method == "POST":
-        form = test_forms.ChangeDescription(request.POST)
-        if form.is_valid():
-            description2 = form.cleaned_data.get("description1")
-            description2 = description2.replace("#", "")
-            url.description2 = description2
-            url.save()
-            return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo})
-            )
-    return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
-
-
-def changedescription3(request, pk_repo, pk_url):
-    url = get_object_or_404(test_models.Url, pk=pk_url)
-    if request.method == "POST":
-        form = test_forms.ChangeDescription(request.POST)
-        if form.is_valid():
-            description3 = form.cleaned_data.get("description1")
-            description3 = description3.replace("#", "")
-            url.description3 = description3
-            url.save()
-            return redirect(
-                reverse("test:urlrepository", kwargs={"pk": pk_repo})
-            )
+                reverse("test:urlrepository",
+                        kwargs={
+                            "pk": pk_repo,
+                            "html_id": "description_{}".format(url.pk)
+                        }))
     return redirect(reverse("test:urlrepository", kwargs={"pk": pk_repo}))
