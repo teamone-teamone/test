@@ -39,11 +39,6 @@ ul {
 }
 
 .homelogo {
-  background: #2e3e99;
-  color: white;
-  text-decoration: none;
-  font-size: 30px;
-  padding: 15px;
 }
 
 .header-icons {
@@ -528,6 +523,13 @@ textarea {
 @media (max-width: 700px) {
   .search-popup-div {
     width: 95%;
+  }
+  .material-icons-sharp.search-repo-btn {
+    margin-right: 2px;
+  }
+  .header-box {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 

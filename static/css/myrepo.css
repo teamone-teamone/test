@@ -32,7 +32,7 @@ body {
   padding: 0;
 }
 
-header.header-box {
+.header-box {
   position: sticky;
   top: 0px;
   z-index: 9;
@@ -131,6 +131,9 @@ div a {
 
 .add-repo-div {
   width: 100%;
+  position: sticky;
+  top: 200px;
+  z-index: 10;
 }
 
 .url-background {
@@ -317,16 +320,9 @@ div a {
 }
 
 .homelogo {
-  background: linear-gradient(to right, #2e3e99, #78bfe7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-decoration: none;
-  font-size: 40px;
-  font-family: "InfinitySans-BoldA1";
-  padding: 15px;
 }
 
-.create_account {
+.logo .create_account {
   background-color: #2e3e99;
   border: none;
   color: white;
@@ -396,24 +392,6 @@ div a {
   color: white;
 }
 
-/*.profile-logo {
-  font-size: 50px;
-  background: linear-gradient(to right, #2e3e99, #78bfe7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-right: 15px;
-}
-
-.logout {
-  font-size: 15px;
-  background: linear-gradient(to right, #2e3e99, #78bfe7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-right: 15px;
-  display: flex;
-  flex-direction: column;
-}*/
-
 .header-search-input {
   /*position: sticky;*/
   border: 2px #2e3e99;
@@ -430,13 +408,6 @@ div a {
   /*border-image: linear-gradient(to right, #2e3e99, #78bfe7);*/
   border-image-slice: 1;
   /*margin: 10px;*/
-}
-
-img {
-  width: 50px;
-  display: block;
-  padding: 15px;
-  margin: 0px;
 }
 
 .w-full {
@@ -572,7 +543,7 @@ div.signup_right {
 
 .background-top {
   position: relative;
-  background-color: white;
+  background-color: transparent;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
   width: 100px;
@@ -806,9 +777,16 @@ div.signup_right {
   .search-popup-div {
     width: 95%;
   }
+  .header-box {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .material-icons-sharp.search-repo-btn {
+    margin-right: 2px;
+  }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .search-popup-title {
     font-size: 35px;
   }
@@ -816,9 +794,6 @@ div.signup_right {
     padding-left: 20px;
     padding-right: 10px;
   }
-}
-
-@media (max-width: 400px) {
   .urls {
     display: flex;
     flex-direction: row;

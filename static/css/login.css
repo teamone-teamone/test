@@ -7,21 +7,20 @@
 }
 
 .header-box {
-  display: inline-block;
-  height: 70px;
-  width: 100%;
-  justify-content: left;
-  align-items: left;
-  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .homelogo {
   width: 10%;
-  background: #2e3e99;
   color: white;
   text-decoration: none;
-  font-size: 30px;
-  padding: 15px;
+
+  margin: 0;
 }
 
 /* main 박스 추가 chan*/
@@ -36,9 +35,11 @@
   width: 50%;
   display: flex;
   align-items: center;
-  background-color: #2e3e99;
 }
 
+.signin-graphic {
+  width: 130%;
+}
 .login-right {
   height: 700px;
   width: 50%;
@@ -338,7 +339,7 @@
 .dp-block {
   display: block;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1022px) {
   .login-left {
     display: none;
   }
@@ -351,5 +352,11 @@
   }
   .button-box-2 {
     width: 95%;
+  }
+}
+@media (max-width: 700px) {
+  .header-box {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
