@@ -169,7 +169,7 @@
                 <div class="url-main-div">
 
                   <div class="link-icon-div">
-                    <a class="url-link" href="{{url.urladdress}}" target="_blank">
+                    <a class="url-link" href=" " onclick="goURL(`{{url.urladdress}}`);">
                       <span class="material-icons-sharp md-30">
                         insert_link
                       </span></a>
@@ -368,6 +368,13 @@
           });
         });
       })(jQuery);
+    const goURL = (url) => {
+      if (url.includes("http")) {
+        window.open(url);
+      } else {
+        alert("잘못된 주소입니다.");
+      }
+    };
   </script>
 
 </html>

@@ -49,6 +49,8 @@ class Url(core_models.TimeStampedModel):
     description = models.CharField(max_length=1000, default="", null=True)
 
     def geturltitle(self):
+        if "chans.pythonanywhere" in self.urladdress:
+            return self.urladdress
         try:
             br = Browser()
             br.set_handle_equiv(False)
