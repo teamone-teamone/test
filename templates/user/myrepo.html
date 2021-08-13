@@ -1,83 +1,209 @@
 {% load i18n %} {%load static%}
 <!DOCTYPE html>
-<html
-  lang="en"
-  class="{%block backgraound_color%} {%endblock backgraound_color %}"
->
+<html lang="en" class="{%block backgraound_color%} {%endblock backgraound_color %}">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
-    />
-    <link rel="stylesheet" href="{% static 'css/styles.css'%}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="{% static 'js/bpop.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/myrepo.css'%}" />
     <title>{{user.nickname}} | URL repo</title>
   </head>
 
   <body>
+
+    <div id="bpopup1" class="search-popup-div">
+      <div class="search-popup-top-div">
+
+        <div class="search-popup-title-div">
+          <span class="search-popup-title">
+            Search with <br> Repo Title
+          </span>
+          <div onclick="closePopup();" class="search-popup-exit-div pointer">
+            <span class="material-icons-sharp md-40 white"> close
+            </span>
+          </div>
+        </div>
+        <div class="search-popup-search-div">
+          <form id="search_popup" class="search-popup-search-form" action="" method="GET">
+
+            <input type="text" class="no-input-box search-popup-search-input" placeholder="search repo title"
+              name="title" {% if search %} value="{{search}}" {% endif %}>
+
+            <button class="material-icons-sharp md-40">
+              search
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="search-popup-line">
+      </div>
+      <div class="search-popup-list-div">
+        <ul class="search-popup-list-ul">
+          {% if not searchlist %}
+          {% if search %}
+
+          <a>
+            <li class="search-popup-list-li">
+              <div class="search-popup-list-title-div">
+                <span class="search-popup-list-span">검색결과가 없습니다.</span>
+              </div>
+              <div class="search-popup-list-icon-div">
+
+              </div>
+            </li>
+          </a>
+
+          {% endif %}
+          {% endif %}
+          {% for repo in searchlist %}
+          <a href="{% url 'test:seerepository' repo.pk %}">
+            <li class="search-popup-list-li">
+              <div class="search-popup-list-title-div">
+                <span class="search-popup-list-span">{{repo.title}}</span>
+              </div>
+              <div class="search-popup-list-icon-div">
+                <span class="material-icons-sharp md-40 white">
+                  chevron_right
+                </span>
+              </div>
+            </li>
+          </a>
+          {% endfor %}
+
+        </ul>
+
+      </div>
+    </div>
+
+
     <header class="header-box">
-      <a class="homelogo" href="{% url 'test:home'%}">URL repo</a>
+      <!-- <a class="homelogo" href="{% url 'test:home'%}">URL repo</a> -->
+      <a href="javascript:history.back()">
+        <span class="material-icons-sharp md-37">
+          arrow_back_ios_new
+        </span>
+      </a>
 
-      <form class="search" method="GET" action="{% url 'user:myrepo'%}">
-      
-        <input
-          class="header-search-input"
-          type="text"
-          name="search-myrepo"
-          maxlength="500"
-          value=""
-          autocomplete="off"
-        />
+      <div id="search_repo" class="flexbox-search">
+        <div class="searchrepo">
+          <span class="material-icons-sharp md-40 search-repo-btn">
+            search
+          </span>
+        </div>
+      </div>
 
-        <button class="img-button" type="submit" value="">
-          <i class="fas fa-search"></i>
-        </button>
-
-      </form>
-
-      <a class="logout" href="{% url 'user:logout' %}"
-        ><i class="profile-logo fas fa-user-circle"></i>logout</a
-      >
+      <a href="{% url 'user:logout' %}">
+        <span class="material-icons-sharp md-37">
+          person
+        </span>
+      </a>
+      <!--<a class="logout" href="{% url 'user:logout' %}"><i class="profile-logo fas fa-user-circle"></i>logout</a> -->
     </header>
 
     <div class="my-repo-backgraound">
       <div class="mysection">
         <div class="page-title-box">
-          <p class="page-title">MY URL SELVES</p>
-        </div>
-        {% for repo in repolist %}
-        <div class="urls">
-          <div class="urlstitle">
-            <a
-              class="my-repo-title"
-              href="{% url 'test:urlrepository' repo.pk%}"
-            >
-              {{repo.title}}
-            </a>
-          </div>
-          <div class="urlsdelete">
-            <a
-              class="delete-btn white"
-              href="{% url 'test:deleterepository' repo.pk%}"
-            >
-              x
-            </a>
-          </div>
-          <br />
-        </div>
-        {% endfor %}
-        <div class="urls">
-          <div class="urlstitle">
-            <a class="my-repo-title" href="{% url 'test:home'%}"
-              >+ new repository</a
-            >
-          </div>
-          <div class="urlsdelete">
-            <a> </a>
-          </div>
+          <p class="page-title">My URL Selves</p>
         </div>
       </div>
     </div>
+
+    <!--<div class="url-wrap">-->
+    <form class="container-input" method="GET">
+      <input type="text" class="search-term" placeholder="Search UR repo" name="search-myrepo" {% if mysearch  %}
+        value="{{mysearch}}" {% endif %}>
+      <button type="submit" class="search-button" id="selectTheory">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+    <br><br>
+
+    <div class="url-background">
+      <div class="add-repo-div">
+        <div class="background-top">
+          <div class="background-big-circle">
+            <div class="background-small-circle">
+              <a href="{% url 'test:home' %}">
+                <div class="material-icons-sharp md-40-add">
+                  add
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="urls-div">
+        {% if not myrepolist%}
+        {% if mysearch %}
+        <div class="urls">
+          <div class="urlstitle">
+            <div class="url-title-box">
+              <a class="my-repo-title">
+                검색 결과가 없습니다.
+              </a>
+              <div class="urlsdelete">
+              </div>
+            </div>
+          </div>
+        </div>
+        {% else %}
+
+        <div class="urls">
+          <div class="urlstitle">
+            <div class="url-title-box">
+              <a class="my-repo-title" href="{% url 'test:home' %}">
+                나의 첫 URL repository 만들기
+              </a>
+              <div class="urlsdelete">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endif %}
+        {% else %}
+
+        {% for repo in myrepolist %}
+        <div class="urls">
+          <div class="urlstitle">
+            <div class="url-title-box">
+              <a class="my-repo-title" href="{% url 'test:urlrepository' repo.pk%}">
+                {% if repo.title %}
+
+                {{repo.title}}
+                {% else %}
+                Repo Title
+                {% endif %}
+              </a>
+              <div class="urlsdelete">
+                <a class="delete-btn" href="{% url 'test:deleterepository' repo.pk%}">
+                  <span class="material-icons-sharp">close</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
   </body>
+
+  <script defer src="{% static 'js/repository.js' %}"></script>
+  <script>
+    if (`{{search}}` !== '')
+      (function ($) {
+        $(function () {
+          $("#bpopup1").bPopup({
+            speed: 0,
+          });
+        });
+      })(jQuery);
+  </script>
+
 </html>

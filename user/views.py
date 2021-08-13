@@ -94,10 +94,22 @@ def signup(request):
 
 
 def myrepo(request):
+    if not request.user.is_authenticated:
+        return redirect(reverse("test:home"))
 
-    search = request.GET.get('search-myrepo', '')
-    repolist = test_models.Repository.objects.filter(
-        for_user=request.user).filter(title__icontains=search)
-    return render(request, "user/myrepo.html", {
-        "repolist": repolist,
-    })
+    mysearch = request.GET.get('search-myrepo', '')
+    search = request.GET.get('title', '')
+    searchlist = []
+
+    if (search):
+        searchlist = test_models.Repository.objects.filter(
+            title__icontains=search)
+    myrepolist = test_models.Repository.objects.filter(
+        for_user=request.user).filter(title__icontains=mysearch)
+    return render(
+        request, "user/myrepo.html", {
+            "myrepolist": myrepolist,
+            "mysearch": mysearch,
+            "searchlist": searchlist,
+            "search": search,
+        })

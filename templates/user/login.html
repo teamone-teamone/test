@@ -28,12 +28,32 @@
             </button>
             <form method="POST" class="input-form-2">
               {% csrf_token %}
-              <input type="text" class="input-field-2" placeholder="User Name" name="nickname"
-                {% if  signup_info.nickname %} value={{signup_info.nickname}}{% endif %} />
-              <input type="email" class="input-field-2" placeholder="Email" name="email" {% if  signup_info.email %}
-                value={{signup_info.email}}{% endif %} />
-              <input type="password" class="input-field-2" placeholder="Password" name="password" />
-              <input type="password" class="input-field-2" placeholder="Confirm Password" name="password1" />
+              <div class="input-div2">
+                <span class="material-icons-sharp icon2">
+                  person
+                </span>
+                <input type="text" class="input-field-2" placeholder="User Name" name="nickname"
+                  {% if  signup_info.nickname %} value={{signup_info.nickname}}{% endif %} />
+              </div>
+              <div class="input-div2">
+                <span class="material-icons-sharp icon2">
+                  mail_outline
+                </span>
+                <input type="email" class="input-field-2" placeholder="Email" name="email" {% if  signup_info.email %}
+                  value={{signup_info.email}}{% endif %} />
+              </div>
+              <div class="input-div2">
+                <span class="material-icons-sharp icon2">
+                  vpn_key
+                </span>
+                <input type="password" class="input-field-2" placeholder="Password" name="password" />
+              </div>
+              <div class="input-div2">
+                <span class="material-icons-sharp icon2">
+                  vpn_key
+                </span>
+                <input type="password" class="input-field-2" placeholder="Confirm Password" name="password1" />
+              </div>
               {% if  signup_error%}
 
               <p class="login-error">
@@ -56,11 +76,23 @@
             </button>
             <form method="POST" class="input-form" name="123">
               {% csrf_token %}
-              <input type="email" class="input-field" placeholder="Email" name="email" {% if  login_info.email %}
-                value={{login_info.email}}{% endif %} />
-              <input type="password" class="input-field" placeholder="Password" name="password" />
-              {% if  login_error%}
 
+              <div class="input-div1">
+                <span class="material-icons-sharp icon1">
+                  mail_outline
+                </span>
+                <input type="email" class="input-field" placeholder="Email" name="email" {% if  login_info.email %}
+                  value={{login_info.email}}{% endif %} />
+              </div>
+
+              <div class="input-div1">
+                <span class="material-icons-sharp icon1">
+                  vpn_key
+                </span>
+
+                <input type="password" class="input-field" placeholder="Password" name="password" />
+              </div>
+              {% if  login_error%}
               <p class="login-error">
                 <span class="material-icons-sharp error">error</span>
                 {{login_error}}

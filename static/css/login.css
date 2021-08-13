@@ -210,12 +210,24 @@
   align-items: center;
 }
 
-.input-field {
+.input-div1 {
   margin-top: 60px;
-  margin-left: 60px;
   width: 70%;
-  border: 0;
+  display: flex;
   border-bottom: 3px solid #ffffff;
+  align-items: center;
+}
+.material-icons-sharp.icon1 {
+  font-size: 24px;
+  font-weight: 200;
+  margin-right: 10px;
+  color: #ffffff;
+  opacity: 70%;
+}
+
+.input-field {
+  width: 90%;
+  border: 0;
   outline: 0;
   font-weight: lighter;
   font-size: 16px;
@@ -286,16 +298,27 @@
   border-radius: 30px;
   align-items: center;
 }
-
-.input-field-2 {
-  margin-top: 40px;
-  margin-left: 60px;
+.input-div2 {
+  margin-top: 60px;
   width: 70%;
-  border: 0;
+  display: flex;
   border-bottom: 3px solid #2e3e99;
-  outline: 0;
-  font-size: 16px;
+  align-items: center;
+}
+.material-icons-sharp.icon2 {
+  font-size: 24px;
+  font-weight: 200;
+  margin-right: 10px;
   color: #2e3e99;
+  opacity: 70%;
+}
+.input-field-2 {
+  width: 90%;
+  border: 0;
+  outline: 0;
+  font-weight: lighter;
+  font-size: 16px;
+  color: #333438;
   padding: 7px 0;
   background: transparent;
   transition: border-color 0.2s;
