@@ -26,21 +26,19 @@ ul {
 .pointer {
   cursor: pointer;
 }
-.white {
+.material-icons-sharp.md-40.white {
   color: #ffffff;
 }
 .header-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 100px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .homelogo {
-  background: #2e3e99;
-  color: white;
-  text-decoration: none;
-  font-size: 30px;
-  padding: 15px;
 }
 
 .header-icons {
@@ -53,14 +51,10 @@ ul {
   margin-right: 25px;
   cursor: pointer;
 }
-.material-icons-sharp.md-32 {
-  font-size: 32px;
-}
 
-.material-icons-sharp.md-58 {
+.material-icons-sharp.md-36-person {
   font-size: 36px;
   color: #2e3e99;
-  margin-right: 25px;
 }
 .empty-content-div {
   display: flex;
@@ -167,8 +161,10 @@ main {
 }
 .webmark-section {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
+
   width: 50%;
+  justify-content: flex-end;
 }
 
 .webmark-box {
@@ -447,7 +443,7 @@ textarea {
   width: 100%;
 }
 
-.material-icons-sharp.md-32 {
+.material-icons-sharp.md-40 {
   font-size: 40px;
   color: #2e3e99;
 }
@@ -526,7 +522,14 @@ textarea {
 }
 @media (max-width: 700px) {
   .search-popup-div {
-    width: 100%;
+    width: 95%;
+  }
+  .material-icons-sharp.search-repo-btn {
+    margin-right: 2px;
+  }
+  .header-box {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 

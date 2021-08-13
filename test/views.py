@@ -9,7 +9,19 @@ from django.contrib.auth import authenticate
 
 
 def home(request):
-    return render(request, "repository/repositoryhome.html")
+    search = request.GET.get('title', '')
+    repolist = []
+    if search:
+        repolist = test_models.Repository.objects.filter(
+            title__icontains=search)
+    return render(
+        request,
+        "repository/repositoryhome.html",
+        {
+            "repolist": repolist if repolist else [],
+            "search": search,
+        },
+    )
 
 
 def firsturlpaste(request):

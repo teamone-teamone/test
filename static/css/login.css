@@ -7,21 +7,20 @@
 }
 
 .header-box {
-  display: inline-block;
-  height: 70px;
-  width: 100%;
-  justify-content: left;
-  align-items: left;
-  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .homelogo {
   width: 10%;
-  background: #2e3e99;
   color: white;
   text-decoration: none;
-  font-size: 30px;
-  padding: 15px;
+
+  margin: 0;
 }
 
 /* main 박스 추가 chan*/
@@ -36,9 +35,11 @@
   width: 50%;
   display: flex;
   align-items: center;
-  background-color: #2e3e99;
 }
 
+.signin-graphic {
+  width: 130%;
+}
 .login-right {
   height: 700px;
   width: 50%;
@@ -210,12 +211,24 @@
   align-items: center;
 }
 
-.input-field {
+.input-div1 {
   margin-top: 60px;
-  margin-left: 60px;
   width: 70%;
-  border: 0;
+  display: flex;
   border-bottom: 3px solid #ffffff;
+  align-items: center;
+}
+.material-icons-sharp.icon1 {
+  font-size: 24px;
+  font-weight: 200;
+  margin-right: 10px;
+  color: #ffffff;
+  opacity: 70%;
+}
+
+.input-field {
+  width: 90%;
+  border: 0;
   outline: 0;
   font-weight: lighter;
   font-size: 16px;
@@ -286,16 +299,27 @@
   border-radius: 30px;
   align-items: center;
 }
-
-.input-field-2 {
-  margin-top: 40px;
-  margin-left: 60px;
+.input-div2 {
+  margin-top: 60px;
   width: 70%;
-  border: 0;
+  display: flex;
   border-bottom: 3px solid #2e3e99;
-  outline: 0;
-  font-size: 16px;
+  align-items: center;
+}
+.material-icons-sharp.icon2 {
+  font-size: 24px;
+  font-weight: 200;
+  margin-right: 10px;
   color: #2e3e99;
+  opacity: 70%;
+}
+.input-field-2 {
+  width: 90%;
+  border: 0;
+  outline: 0;
+  font-weight: lighter;
+  font-size: 16px;
+  color: #333438;
   padding: 7px 0;
   background: transparent;
   transition: border-color 0.2s;
@@ -315,7 +339,7 @@
 .dp-block {
   display: block;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1022px) {
   .login-left {
     display: none;
   }
@@ -328,5 +352,11 @@
   }
   .button-box-2 {
     width: 95%;
+  }
+}
+@media (max-width: 700px) {
+  .header-box {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }

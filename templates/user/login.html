@@ -8,14 +8,46 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/login.css'%}" />
     <title>Sign in & up| URL repo</title>
+    <!--favicon 생성 by 샛별-->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'image/favicon/apple-icon-57x57.png'%}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'image/favicon/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'image/favicon/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'image/favicon/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'image/favicon/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'image/favicon/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'image/favicon/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'image/favicon/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'image/favicon/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'image/favicon/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'image/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'image/favicon/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'image/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'image/favicon/manifest.json' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{% static 'image/favicon/ms-icon-144x144.png' %}">
+    <meta name="theme-color" content="#ffffff">
+
+    <!--썸네일 생성 by 샛별-->
+    <meta property="og:url" content="http://chans.pythonanywhere.com/">
+    <meta property="og:title" content="URL repo">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{% static 'image/thumbnail.png' %}">
+    <meta property="og:description" content="Save URL, Save UR Time">
+
   </head>
 
   <body>
     <header class="header-box">
-      <a class="homelogo" href="{% url 'test:home'%}">로고 들어감</a>
+      <a class="homelogo" href="{% url 'test:home'%}"><img class="logo" src="{% static 'image/logo-blue.png' %}"
+          width="210px" alt="home" /></a></a>
     </header>
     <div class="main">
-      <div class="login-left"></div>
+      <div class="login-left">
+        <img class="signin-graphic" src="{% static 'image/signin-graphic.png' %}" alt="url-repo" />
+
+
+
+      </div>
 
       <div class="login-right">
         <div class="box">
@@ -28,12 +60,32 @@
             </button>
             <form method="POST" class="input-form-2">
               {% csrf_token %}
-              <input type="text" class="input-field-2" placeholder="User Name" name="nickname"
-                {% if  signup_info.nickname %} value={{signup_info.nickname}}{% endif %} />
-              <input type="email" class="input-field-2" placeholder="Email" name="email" {% if  signup_info.email %}
-                value={{signup_info.email}}{% endif %} />
-              <input type="password" class="input-field-2" placeholder="Password" name="password" />
-              <input type="password" class="input-field-2" placeholder="Confirm Password" name="password1" />
+              <div class="input-div2">
+                <span class="material-icons-sharp icon2">
+                  person
+                </span>
+                <input type="text" class="input-field-2" placeholder="User Name" name="nickname"
+                  {% if  signup_info.nickname %} value={{signup_info.nickname}}{% endif %} />
+              </div>
+              <div class="input-div2">
+                <span class="material-icons-sharp icon2">
+                  mail_outline
+                </span>
+                <input type="email" class="input-field-2" placeholder="Email" name="email" {% if  signup_info.email %}
+                  value={{signup_info.email}}{% endif %} />
+              </div>
+              <div class="input-div2">
+                <span class="material-icons-sharp icon2">
+                  vpn_key
+                </span>
+                <input type="password" class="input-field-2" placeholder="Password" name="password" />
+              </div>
+              <div class="input-div2">
+                <span class="material-icons-sharp icon2">
+                  vpn_key
+                </span>
+                <input type="password" class="input-field-2" placeholder="Confirm Password" name="password1" />
+              </div>
               {% if  signup_error%}
 
               <p class="login-error">
@@ -56,11 +108,23 @@
             </button>
             <form method="POST" class="input-form" name="123">
               {% csrf_token %}
-              <input type="email" class="input-field" placeholder="Email" name="email" {% if  login_info.email %}
-                value={{login_info.email}}{% endif %} />
-              <input type="password" class="input-field" placeholder="Password" name="password" />
-              {% if  login_error%}
 
+              <div class="input-div1">
+                <span class="material-icons-sharp icon1">
+                  mail_outline
+                </span>
+                <input type="email" class="input-field" placeholder="Email" name="email" {% if  login_info.email %}
+                  value={{login_info.email}}{% endif %} />
+              </div>
+
+              <div class="input-div1">
+                <span class="material-icons-sharp icon1">
+                  vpn_key
+                </span>
+
+                <input type="password" class="input-field" placeholder="Password" name="password" />
+              </div>
+              {% if  login_error%}
               <p class="login-error">
                 <span class="material-icons-sharp error">error</span>
                 {{login_error}}
