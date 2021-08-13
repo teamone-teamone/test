@@ -10,18 +10,17 @@
   display: inline-block;
   height: 70px;
   width: 100%;
-  justify-content: left;
   align-items: left;
-  margin: 0 auto;
 }
 
 .homelogo {
-  width: 10%;
-  background: #2e3e99;
-  color: white;
-  text-decoration: none;
-  font-size: 30px;
-  padding: 15px;
+  height: 50%;
+  align-items: center;
+}
+
+.logo{
+  height: 70%;
+  padding: 10px;
 }
 
 /* main 박스 추가 chan*/
@@ -32,15 +31,18 @@
 }
 
 .login-left {
-  height: 700px;
+  height: 600px;
   width: 50%;
   display: flex;
   align-items: center;
-  background-color: #2e3e99;
+}
+
+.signin-graphic{
+  height: 90%;
 }
 
 .login-right {
-  height: 700px;
+  height: 600px;
   width: 50%;
 }
 

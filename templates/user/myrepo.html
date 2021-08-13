@@ -17,7 +17,8 @@
 
   <body>
     <header class="header-box">
-      <a class="homelogo" href="{% url 'test:home'%}">URL repo</a>
+      <a class="homelogo" href="{% url 'test:home'%}">
+        <img class="logo" src ="{% static 'image/logo-blue.png' %}" width=30% alt ="home"/></a>
 
       <form class="search" method="GET" action="{% url 'user:myrepo'%}">
       
