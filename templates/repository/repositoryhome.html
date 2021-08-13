@@ -11,6 +11,33 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
     <script src="{% static 'js/bpop.js' %}"></script>
     <title>URL repo</title>
+
+<!--favicon 생성 by 샛별-->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'image/favicon/apple-icon-57x57.png'%}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'image/favicon/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'image/favicon/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'image/favicon/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'image/favicon/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'image/favicon/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'image/favicon/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'image/favicon/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'image/favicon/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'image/favicon/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'image/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'image/favicon/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'image/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'image/favicon/manifest.json' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{% static 'image/favicon/ms-icon-144x144.png' %}">
+    <meta name="theme-color" content="#ffffff">
+
+<!--썸네일 생성 by 샛별-->
+    <meta property="og:url" content="http://chans.pythonanywhere.com/">
+    <meta property="og:title" content="URL repo">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{% static 'image/thumbnail.png' %}">
+    <meta property="og:description" content="Save URL, Save UR Time">
+    <title>코드공부방</title>
   </head>
 
   <body>
@@ -34,7 +61,8 @@
     </div>
     <header class="header-box">
 
-      <a class="homelogo" href="{% url 'test:home'%}">URL repo</a>
+      <a class="homelogo" href="{% url 'test:home'%}">
+        <img class="logo" src ="{% static 'image/logo-blue.png' %}" width=30% alt ="home"/></a>
 
       <div class="header-icons">
         <span id="search_repo" class="material-icons-sharp md-32 search-repo-btn">

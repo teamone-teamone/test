@@ -36,11 +36,14 @@ ul {
 }
 
 .homelogo {
-  background: #2e3e99;
-  color: white;
-  text-decoration: none;
-  font-size: 30px;
-  padding: 15px;
+  height: 50%;
+  padding: 10px;
+  align-items: center;
+}
+
+.logo{
+  height: 100%;
+  height: 100%;
 }
 
 .header-icons {

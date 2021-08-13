@@ -6,16 +6,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'css/login.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/login.css'%}"/>
     <title>Sign in & up| URL repo</title>
   </head>
 
   <body>
     <header class="header-box">
-      <a class="homelogo" href="{% url 'test:home'%}">로고 들어감</a>
+      <a class="homelogo" href="{% url 'test:home'%}">
+        <img class="logo" src ="{% static 'image/logo-blue.png' %}" width=17.85%  alt ="home"/></a>
     </header>
     <div class="main">
-      <div class="login-left"></div>
+      <div class="login-left">
+          <img class ="signin-graphic" src="{% static 'image/signin-graphic.png' %}" alt="url-repo"/>
+      </div>
 
       <div class="login-right">
         <div class="box">
