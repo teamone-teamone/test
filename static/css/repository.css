@@ -150,6 +150,7 @@ main {
   font-weight: bold;
   border-radius: 10px;
   text-overflow: ellipsis;
+  background-color: transparent;
 }
 
 .repo-title::placeholder {
@@ -237,6 +238,8 @@ main {
   color: #2e3e99;
 
   font-weight: bolder;
+
+  background-color: transparent;
 }
 .link-icon-div {
   display: flex;
@@ -312,6 +315,8 @@ main {
   resize: none;
   overflow: hidden;
   transition: all 0.5s;
+
+  background-color: transparent;
 }
 
 textarea {
@@ -508,6 +513,125 @@ textarea {
   letter-spacing: 0.25px;
   color: #ffffff;
 }
+
+.share-btn-div {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  background-color: #2e3e99;
+  border-radius: 50px;
+  -webkit-box-shadow: 5px 5px 15px 5px #979797;
+  box-shadow: 5px 5px 15px 5px #979797;
+  transition: all 0.4s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.material-icons-sharp.share-icon {
+  color: #fcfcfc;
+}
+
+.share-btn-text {
+  color: #fcfcfc;
+  width: 0;
+  overflow: hidden;
+  transition: all 0.7s;
+}
+
+.share-btn-div:hover {
+  width: 150px;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+}
+
+.share-btn-div:hover .share-btn-text {
+  width: auto;
+  margin-left: 15px;
+}
+
+.share-popup-div {
+  display: none;
+  background-color: white;
+  width: 650px;
+  height: 260px;
+  background: #2e3e99;
+  border-radius: 30px;
+  padding-bottom: 30px;
+  padding-top: 30px;
+  position: fixed;
+  right: 10px;
+  bottom: 5px;
+}
+
+.share-popup-line {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 100%;
+  margin-top: 20px;
+}
+
+.share-popup-content-box {
+  padding: 20px 50px 0px 50px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.share-popup-content-text-box {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+.share-popup-content-text {
+  color: #fcfcfc;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+.share-popup-content-input {
+  background-color: transparent;
+  color: #fcfcfc;
+}
+.share-popup-content-btn-div {
+  background-color: #fcfcfc;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 120px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.share-popup-content-btn-text {
+  color: #2e3e99;
+  margin-right: 10px;
+}
+.material-icons-sharp.copy-icon {
+  color: #2e3e99;
+  font-size: 20px;
+}
+
+.check-popup-div {
+  display: none;
+  width: 250px;
+  height: 60px;
+  background-color: #979797;
+  border-radius: 10px;
+}
+.check-popup-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #2e3e99;
+  font-weight: 900;
+  font-size: x-large;
+}
+
 @media (max-width: 1024px) {
   .webmark-container {
     flex-direction: column;
@@ -520,7 +644,8 @@ textarea {
   }
 }
 @media (max-width: 700px) {
-  .search-popup-div {
+  .search-popup-div,
+  .share-popup-div {
     width: 95%;
   }
   .material-icons-sharp.search-repo-btn {
@@ -542,5 +667,8 @@ textarea {
   }
   .webmark-title {
     width: 100%;
+  }
+  .share-popup-content-text {
+    font-size: 15px;
   }
 }

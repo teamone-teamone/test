@@ -12,8 +12,25 @@ var BPOPUP = "";
   });
 })(jQuery);
 
-const closePopup = () => {
+const closePopup1 = () => {
   $("#bpopup1").bPopup().close();
+};
+
+(function ($) {
+  $(function () {
+    $("#share_repo").bind("click", function (e) {
+      e.preventDefault();
+      BPOPUP = $("#bpopup2").bPopup({
+        speed: 600,
+        transition: "slideUp",
+        transitionClose: "slideUp",
+      });
+    });
+  });
+})(jQuery);
+
+const closePopup2 = () => {
+  $("#bpopup2").bPopup().close();
 };
 
 document.querySelectorAll("form").forEach((element) => {

@@ -49,7 +49,7 @@
           <span class="search-popup-title">
             Search with <br> Repo Title
           </span>
-          <div onclick="closePopup();" class="search-popup-exit-div pointer">
+          <div onclick="closePopup1();" class="search-popup-exit-div pointer">
             <span class="material-icons-sharp md-40 white"> close
             </span>
           </div>
@@ -137,8 +137,7 @@
             enctype="multipart/form-data">
             {% csrf_token %}
             <input class="no-input-box repo-title" type="text" name="title" maxlength="30" required=""
-              {% if repository.title %}value="{{repository.title}}" {% endif %} id="id_title"
-              placeholder="Repo Title" />
+              {% if repository.title %}value="{{repository.title}}" {% endif %} placeholder="Repo Title" />
           </form>
         </div>
 
@@ -157,7 +156,7 @@
                   enctype="multipart/form-data">
                   {% csrf_token %}
                   <input class="no-input-box webmark-title" type="text" name="title" maxlength="15" required=""
-                    {% if webmark.title %} value="{{webmark.title}}" {% endif %} id="id_title" placeholder="Title" />
+                    {% if webmark.title %} value="{{webmark.title}}" {% endif %} placeholder="Title" />
                 </form>
                 <a class=" delete-btn" href="{% url 'test:deleteWebmark' repository.pk webmark.pk %}">
                   <span class="material-icons-sharp">
@@ -178,7 +177,7 @@
                     enctype="multipart/form-data">
                     {% csrf_token %}
                     <input class="no-input-box url-title-input" type="text" name="urltitle" maxlength="100" required=""
-                      value="{{url.urltitle}}" id="id_urltitle" />
+                      value="{{url.urltitle}}"="id_urltitle" />
                   </form>
                   <div class="icon-div">
                     <span class="url-arrow " onclick="toggle_description({{url.pk}})">
@@ -200,7 +199,7 @@
                     action="{% url 'test:changedescription' repository.pk url.pk%}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <textarea class="no-input-box descrip" type="text" name="description" maxlength="990"
-                      id="id_description" placeholder="Description">{{url.description}}</textarea>
+                      placeholder="Description">{{url.description}}</textarea>
 
                   </form>
                   <div class="null-div"></div>
@@ -216,7 +215,7 @@
                     enctype="multipart/form-data">
                     {% csrf_token %}
                     <input class="no-input-box add-url" type="text" name="urladdress" maxlength="300" required=""
-                      id="id_urladdress" placeholder="Add url" />
+                      placeholder="Add url" />
                   </form>
                 </div>
               </div>
@@ -239,7 +238,7 @@
                   enctype="multipart/form-data">
                   {% csrf_token %}
                   <input class="no-input-box webmark-title" type="text" name="title" maxlength="15" required=""
-                    {% if webmark.title %} value="{{webmark.title}}" {% endif %} id="id_title" placeholder="Title" />
+                    {% if webmark.title %} value="{{webmark.title}}" {% endif %} placeholder="Title" />
                 </form>
                 <a class=" delete-btn" href="{% url 'test:deleteWebmark' repository.pk webmark.pk %}">
                   <span class="material-icons-sharp">
@@ -260,7 +259,7 @@
                     enctype="multipart/form-data">
                     {% csrf_token %}
                     <input class="no-input-box url-title-input" type="text" name="urltitle" maxlength="100" required=""
-                      value="{{url.urltitle}}" id="id_urltitle" />
+                      value="{{url.urltitle}}" />
                   </form>
                   <div class="icon-div">
                     <span class="url-arrow " onclick="toggle_description({{url.pk}})">
@@ -282,7 +281,7 @@
                     action="{% url 'test:changedescription' repository.pk url.pk%}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <textarea class="no-input-box descrip" type="text" name="description" maxlength="990"
-                      id="id_description" placeholder="Description">{{url.description}}</textarea>
+                      placeholder="Description">{{url.description}}</textarea>
 
                   </form>
                   <div class="null-div"></div>
@@ -298,7 +297,7 @@
                     enctype="multipart/form-data">
                     {% csrf_token %}
                     <input class="no-input-box add-url" type="text" name="urladdress" maxlength="300" required=""
-                      id="id_urladdress" placeholder="Add url" />
+                      placeholder="Add url" />
                   </form>
                 </div>
               </div>
@@ -312,8 +311,69 @@
 
 
       </div>
+
+      <div class="share-btn-div" id="share_repo">
+        <span class="material-icons-sharp share-icon">
+          share
+        </span>
+        <span class="share-btn-text">Share</span>
+      </div>
+
+
+
+
+
     </main>
 
+    <div id="bpopup2" class="share-popup-div">
+      <div class="search-popup-top-div">
+        <div class="search-popup-title-div">
+          <span class="search-popup-title">
+            Share this repo
+          </span>
+          <div onclick="closePopup2();" class="search-popup-exit-div pointer">
+            <span class="material-icons-sharp md-40 white"> close
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="share-popup-line">
+      </div>
+      <div class="share-popup-content-div">
+        <div class="share-popup-content-box">
+          <span class="share-popup-content-text">
+            편집 가능 링크
+          </span>
+          <div class=" share-popup-content-btn-div" onclick="copyAbleLink();">
+            <span class="share-popup-content-btn-text">
+              링크복사
+            </span>
+            <span class="material-icons-sharp copy-icon">
+              content_copy
+            </span>
+          </div>
+        </div>
+
+      </div>
+      <div class="share-popup-content-box">
+        <span class="share-popup-content-text">
+          편집 불가능 링크
+        </span>
+        <div class=" share-popup-content-btn-div" onclick="copyUnableLink();">
+          <span class="share-popup-content-btn-text">
+            링크복사
+          </span>
+          <span class="material-icons-sharp copy-icon">
+            content_copy
+          </span>
+        </div>
+      </div>
+    </div>
+    <div id="bpopup3" class="check-popup-div">
+      <div class="check-popup-box">
+        COPIED!
+      </div>
+    </div>
   </body>
   <script defer src="{% static 'js/repository.js' %}"></script>
   <script defer>
@@ -345,8 +405,13 @@
 
 
 
-    const toggle_description = (pk) => {
-      $(`#description_${pk}`).slideToggle(300);
+    const toggle_description = async (pk) => {
+      let promise = new Promise((resolve, reject) => {
+        $(`#description_${pk}`).slideToggle(400);
+        setTimeout(() => resolve(), 200)
+      });
+      await promise;
+      adjustHeight($(`#description_${pk}`)[0][1]);
     };
 
     $(`.descrip-form`).hide()
@@ -354,6 +419,7 @@
 
     if ('{{html_id}}'.includes('description')) {
       $(`#{{html_id}}`).show()
+      adjustHeight($(`#{{html_id}}`)[0][1]);
     }
 
 
@@ -375,6 +441,34 @@
         alert("잘못된 주소입니다.");
       }
     };
+
+    const copyAbleLink = () => {
+      var tempElem = document.createElement('textarea');
+      tempElem.value = `https://chans.pythonanywhere.com{% url "test:urlrepository" repository.pk %}`;
+      document.body.appendChild(tempElem);
+      tempElem.select();
+      tempElem.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      tempElem.setSelectionRange(0, 0);
+      document.body.removeChild(tempElem);
+      BPOPUP = $("#bpopup3").bPopup({
+        autoClose: 600
+      });
+    }
+
+    const copyUnableLink = () => {
+      var tempElem = document.createElement('textarea');
+      tempElem.value = `https://chans.pythonanywhere.com{% url "test:seerepository" repository.pk %}`;
+      document.body.appendChild(tempElem);
+      tempElem.select();
+      tempElem.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      tempElem.setSelectionRange(0, 0);
+      document.body.removeChild(tempElem);
+      BPOPUP = $("#bpopup3").bPopup({
+        autoClose: 600
+      });
+    }
   </script>
 
 </html>
